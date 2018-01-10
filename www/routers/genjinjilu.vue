@@ -61,7 +61,7 @@
         margin: .1rem auto;
     }
 
-    //遮罩
+    /*//遮罩*/
     .shadow {
         position: fixed;
         left: 0;
@@ -87,6 +87,95 @@
         background:url(../resources/images/icons/right-arrow.jpg) no-repeat;
         background-size: 20px 20px;
         padding: 12% 5%;background-origin: content-box;}
+    .analy_content{
+    	height: 1.6rem;
+    	line-height: 1.6rem;
+    	font-size: 0.36rem;
+    	color: #fff;
+    	font-weight: bold;
+    	padding-left: 0.25rem;
+    }
+    .analy_item{
+    	position: relative;
+    	width: 100%;
+    	height: 2.43rem;
+    	padding: 0;
+    	background: url(../resources/images/fangyfx/genjinlist/bg.png) no-repeat center;
+    	background-size: cover;
+    	border-radius:0!important;
+    }
+    .an_bottom{
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		height: 0.85rem;
+		line-height: 0.85rem;
+		background: rgba(0,0,0,0.3);
+		padding-left: 0.25rem;
+		font-size: 0.24rem;
+		color: #fff;
+    }
+    .add{
+    	position: absolute;
+    	bottom: -0.4725rem;
+    	right: 0.45rem;
+    	width: 0.95rem;
+    	height: 0.95rem;
+    	background: url(../resources/images/fangyfx/genjinlist/add.png) no-repeat center;
+    	background-size: cover;
+    }
+    .list_box{
+    	margin-top: 0.55rem;
+    }
+    .start{
+    	position: relative;
+    	height: 1rem;
+    	padding-left: 0.25rem;
+    	span{
+    		position: absolute;
+    		top: -0.2rem;
+    		display: inline-block;
+    		width: 1.2rem;
+    		height: 0.5rem;
+    		line-height: 0.5rem;
+    		background: #3586f2;
+    		font-size: 0.22rem;
+    		text-align: center;
+    		color: #fff;
+    		border-radius: 0.5rem;
+    		i{
+    			position: absolute;
+    			bottom: -0.65rem;
+    			left: 0.6rem;
+    			display: inline-block;
+    			width: 0.02rem;
+    			height: 0.65rem;
+    			border-left: 1px dashed #838383;
+    		}
+    	}
+    }
+    .ys_listcon{
+    	position: relative;
+    	width: 7rem;
+    	margin: 0 auto 0.3rem;
+    	border-radius: 0.08rem;
+    	-webkit-box-shadow:0px 0px 0.04rem #E2E1E7; 
+    	box-shadow:0px 0px 0.04rem #E2E1E7;
+    	padding: 0.24rem;
+    	i{
+			position: absolute;
+			bottom: -0.65rem;
+			left: 0.6rem;
+			display: inline-block;
+			width: 0.02rem;
+			height: 0.65rem;
+			border-left: 1px dashed #838383;
+		}
+		p:first-child{margin-bottom: 0.3rem;font-size: 0.28rem;}
+    }
+    .ys_listcon:last-child{
+    	i{display: none;}
+    }
 </style>
 
 
@@ -95,35 +184,50 @@
 <template>
     <div>
         <div class="option">
-            <div class="analy_item" style="padding: 0;line-height: 0.8rem;padding-left: 0.4rem;box-shadow: 1px 1px 3px rgb(196,195,200);border-radius:5px;">
+            <div class="analy_item" style="box-shadow: 1px 1px 3px rgb(196,195,200);border-radius:5px;">
                 <div class="analy_content">
-                    <span style="color: black;font-weight: 500;font-size: 0.36rem;" v-text="lpname">建外soho</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span style="color: black;font-weight: 500;font-size: 0.36rem;" v-text="zdname">建外soho</span>
+                    <span v-text="lpname"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span v-text="zdname"></span>
                 </div>
+                <p class="an_bottom">开始跟进时间<span v-text="ksgjshj"></span>   跟进记录（<span v-text="jls"></span>）</p>
+                <a href="javascript:;"><p class="add" @click="saveOwnerData"></p></a>
             </div>
             <!--筛选结果start-->
-            <ul
-                    v-infinite-scroll="loadMore"
-                    infinite-scroll-disabled="loading"
-                    infinite-scroll-distance="20"
-                    infinite-scroll-immediate-check="checked">
+            <ul>
+                <div class="start" style="margin-top: 0.7rem;">
+                	<span>跟进情况<i class="dash"></i></span>
+                	
+                </div>
                 <li class="ys_listcon pv15 clearfix" v-for="item in resultData">
-                    <dl class="supply">
-                        <dt style="width: 0.9rem;height: 1.9rem;padding-top: 0.2rem;">
+                    <!--<dl class="supply">
+                        <!--<dt style="width: 0.9rem;height: 1.9rem;padding-top: 0.2rem;">
                             <dd style="border:1px solid #8B8989;width: 0.3rem;height: 0.3rem;border-radius:50%;"></dd>
                             <hr style="border:0.1px dashed #8B8989;width: 0.5rem;margin-top: -0.15rem;margin-left: 0.37rem;" />
                             <hr style="border:0.1px dashed #8B8989;width: 1.5rem;transform:rotate(90deg);margin-top:0.93rem;margin-left: -0.6rem;" />
-                        </dt>
-                        <dd style="margin-left: 0.85rem;height: 1.5rem;padding-top: 0.2rem;">
+                        </dt>-->
+                        <!--<dd style="margin-left: 0.85rem;height: 1.5rem;padding-top: 0.2rem;">
                             <dl style="height: 0.6rem;">
                                 <dd style="float: left;">{{item.depart}}</dd>
                                 <dd style="float: left;">{{item.gjname}}</dd>
                                 <dd style="float: right;margin-right: 0.3rem;">{{item.gtime}}</dd>
                             </dl>
                             <dl>{{item.information}}</dl>
-                        </dd>
+                        </dd>-->
 
-                    </dl>
+                    <!--</dl>-->
+
+                    <!--css中的换行标签word-break:break-all;word-wrap:break-word;-->
+                    <p style="word-break:break-all;word-wrap:break-word;">{{item.information}}</p>
+                    <p style="display: flex;justify-content: flex-end;color: #969696;font-size: 0.24rem;align-items: flex-end;">
+                        <span>
+                            {{item.depart}}
+                            <span v-if="item.depart == '' || item.gtime==''"></span>
+                            <span v-else>-</span>
+                        </span>
+                    	<span>{{item.gjname}}</span>
+                    	<span style="margin-left: 0.3rem;margin-top: 0.05rem;">{{item.gtime}}</span>
+                    </p>
+                    <i class="dash"></i>
                 </li>
             </ul>
             <p v-if="loading" class="page-infinite-loading">
@@ -133,9 +237,9 @@
         <div class="mask" id="maskEl" @click="closeFilter"
              :class="{show:this.currentFilterTab=='district'||this.currentFilterTab=='price'||this.currentFilterTab=='area'||this.currentFilterTab=='features'}">
         </div>
-        <div style="position: fixed;bottom: -0.7rem;left:0rem;width: 100%;background-color: white;">
+        <!--<div style="position: fixed;bottom: -0.7rem;left:0rem;width: 100%;background-color: white;">
             <a href="javascript:;" class="ys_default_btn mb80" style="" @click="saveOwnerData">++</a>
-        </div>
+        </div>-->
     </div>
 </template>
 <script>
@@ -169,6 +273,8 @@
                 priceArray: [],
                 sizeArray: [],
                 subBusiness: [],
+                ksgjshj:'',//开始跟进的时间
+                jls:'',//跟进记录数
 
                 currentFilterTab: 'nth',
                 curTab: 'nth',
@@ -200,7 +306,7 @@
             }
         },
         mounted(){
-            $('title').html('楼盘列表');
+            $('title').html('跟进记录');
             this.getData();
         },
         created: function () {
@@ -224,7 +330,7 @@
                     Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
                     this.lpname = data.topic;
-                    this.zdname = data.zdh +'-'+ + data.fybh;
+                    this.zdname = data.zdh +'-'+data.fybh;
                 }, (res)=>{
                     Indicator.close()
                 });
@@ -239,8 +345,13 @@
                              var m = "0"+(date.getMonth()+1);
                              var d = "0"+date.getDate();
                              this.resultData[i].gtime= y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
+                            if(i == this.resultData.length-1){
+                                this.ksgjshj = this.resultData[i].gtime;
+                            }
                         }
+
                     }
+                    this.jls = this.resultData.length;
                 }, (res)=>{
                     Indicator.close()
                 });
@@ -348,7 +459,7 @@
                 this.para.curr_page = 1;
                 this.getData();
             },
-            getFilters: function () {
+            /*getFilters: function () {
                 const that = this;
                 const url = this.$api + "/yhcms/web/jcsj/getTj.do";
                 axios.post(url, {})
@@ -363,8 +474,8 @@
             chooseFilter: function (e) {
                 var e = e || window.event;
                 this.currentFilterTab = $(e.target).closest('li').attr('data-type')
-            },
-            resetGetData: function () {
+            },*/
+            /*resetGetData: function () {
                 var paraObj = {
                     "parameters": {
                         "search_keywork": this.para.search_keywork,
@@ -407,8 +518,8 @@
                 this.resultData = [];
                 this.para.curr_page = 1;
                 this.gRemoteData(paraObj, successCb, errorCb);
-            },
-            selfInputPrice: function () {
+            },*/
+            /*selfInputPrice: function () {
                 if (parseInt(parseFloat(this.price1)*100) < parseInt(parseFloat(this.price2) * 100)) {
                     this.para.price_dj = JSON.stringify([parseFloat(this.price1), parseFloat(this.price2)]);
                     this.para.curr_page = 1;
@@ -422,8 +533,8 @@
                         duration: 2000
                     });
                 }
-            },
-            selfInputSize: function () {
+            },*/
+          /*  selfInputSize: function () {
                 if (parseInt(parseFloat(this.size1)*100) < parseInt(parseFloat(this.size2) * 100)) {
                     this.para.area = JSON.stringify([parseFloat(this.size1), parseFloat(this.size2)]);
                     this.para.curr_page = 1;
@@ -436,9 +547,9 @@
                         duration: 2000
                     });
                 }
-            },
+            },*/
 
-
+/*
             gRemoteData(paraobj, successcb, errorcb){
                 const url = this.$api + "/yhcms/web/lpjbxx/getLplb.do";
                 axios.post(url, paraobj)
@@ -451,16 +562,16 @@
                         errorcb(error)
                     }
                 });
-            },
-            loadMore(){
+            },*/
+           /* loadMore(){
                 if (!this.loading && !this.noMore) {
                     this.loading = true;
                     this.para.curr_page += 1;
                     this.getData();
                 }
-            },
+            },*/
 
-            shadowShow(event){
+           /* shadowShow(event){
                 $('.shadow').show();
                 const evt = (event || window.event), target = (evt.target || evt.srcElement), href = $(target).parents("a"), lpid=$(href).attr("lpid");
                 this.lpid = lpid;
@@ -470,15 +581,15 @@
                     bottom: 0
                 });
 
-            }
+            }*/
         },
-        watch: {
+       /* watch: {
             '$route' (to, from) {
                 if (to['query']['keyword']) {
                     this.para.search_keywork = to['query']['keyword'];
                     this.resetGetData();
                 }
             },
-        }
+        }*/
     }
 </script>

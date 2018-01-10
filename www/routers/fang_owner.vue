@@ -26,10 +26,10 @@
       <table class="ys_item_ul mb20" style="width:100%;border-collapse: collapse;">
         <tr style="background-color: white;"><td colspan="4" style="height: .2rem;"></td></tr>
         <tr style="text-align:center;background-color: rgb(206,206,206);height: .7rem;">
-          <td style="width: 1.5rem;">姓名</td>
-          <td style="width: 1.5rem;">性别</td>
-          <td style="width: 2.2rem;">联系方式</td>
-          <td style="width: 2.8rem;">操作</td>
+          <td style="width: 18%;">姓名</td>
+          <td style="width: 18%;">性别</td>
+          <td style="width: 27%;">联系方式</td>
+          <td style="width: 37%;">操作</td>
         </tr>
         <tr v-for="datum in data" class="clearfix pr" style="text-align:center;border-bottom: 1px solid rgb(206,206,206);height: .8rem;">
           <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43" style="width: 1.5rem;word-break:break-all;"> <span class="ys_tit">{{datum.topic}}</span></td>
@@ -41,15 +41,19 @@
           <!--<td style="width: 1.5rem;"> <span class="ys_tit">{{datum.topic}}</span></td>
           <td style="width: 1.5rem;"> <span class="ys_tit">{{datum.xb=="1"?"男":""}}{{datum.xb=="0"?"女":""}}</span></td>
           <td style="word-wrap:break-word;width:2.8rem;"> <span>{{datum.phone}}</span></td>-->
-          <td style="width: 2.8rem;" v-if="datum.qxzt == 1 || datum.qxzt == 21 || datum.qxzt == 22 || datum.qxzt == 31 || datum.qxzt == 32 || datum.qxzt == 46 || datum.qxzt == 50 || datum.qxzt == 42 || datum.qxzt == 44 || datum.qxzt == 49">
+          <td style="width: 35%;" v-if="datum.qxzt == 1 || datum.qxzt == 21 || datum.qxzt == 22 || datum.qxzt == 31 || datum.qxzt == 32 || datum.qxzt == 46 || datum.qxzt == 42 || datum.qxzt == 492">
             <i class="" :owner="datum.id" @click="modifyOwner($event)">修改</i>
             <i class="" :owner="datum.id" @click="modifyOwnerck($event)">查看</i>
             <i class="" :owner="datum.id" @click="modifyOwner1($event)">删除</i>
           </td>
-          <td style="width: 2.8rem;" v-if="datum.qxzt == 3 || datum.qxzt == 11 || datum.qxzt == 24 || datum.qxzt == 20 || datum.qxzt == 34 || datum.qxzt == 30 || datum.qxzt == 41 || datum.qxzt == 47 || datum.qxzt == 45">
+          <td style="width: 35%;" v-if="datum.qxzt == 3 || datum.qxzt == 11 || datum.qxzt == 24 || datum.qxzt == 20 || datum.qxzt == 34 || datum.qxzt == 30 || datum.qxzt == 41 || datum.qxzt == 47 || datum.qxzt == 45">
             <i class="" :owner="datum.id" @click="modifyOwnerck($event)">查看</i>&nbsp;&nbsp;&nbsp;
           </td>
-          <td style="width: 2.8rem;" v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43">
+          <td style="width: 35%;" v-if="datum.qxzt == 211 || datum.qxzt == 311 || datum.qxzt == 50">
+            <i class="" :owner="datum.id" @click="modifyOwner($event)">修改</i>
+            <i class="" :owner="datum.id" @click="modifyOwnerck($event)">查看</i>
+          </td>
+          <td style="width: 35%;" v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43 || datum.qxzt == 44 || datum.qxzt == 233 || datum.qxzt == 311 || datum.qxzt == 491 || datum.qxzt == 49">
 
           </td>
         </tr>
@@ -87,11 +91,6 @@
                     this.ryzt = data.ryzt;
                     this.qxzt = data.qxzt;
                     //data.fyzt = 0;
-                    console.log(data.qxzt);
-                    console.log(data.ryzt);
-                    console.log(data.fyzt);
-                    console.log(this.tjyzqx+"aaa");
-                    console.log(this.data);
                     if(data.fyzt == 1 || data.ryzt == 1){
                         this.tjyzqx = false;
                     }else{
@@ -119,7 +118,7 @@
                     "parameters": {
                         "cookie": user22.sjs, "id": this.id, "foreEndType": 2, "code": "30000008"
                     }
-                    }).then((res)=>{
+                }).then((res)=>{
                     Indicator.close()
                     const data = JSON.parse(res.bodyText).data;
                     const data1 = JSON.parse(res.bodyText).data1;
@@ -135,7 +134,7 @@
                     that.data = data;
                     console.log(that.data);
                     for(var i=0;i<that.data.length;i++){
-                        if(that.data[i].qxzt == 10 || that.data[i].qxzt == 25 || that.data[i].qxzt == 23 || that.data[i].qxzt == 35 || that.data[i].qxzt == 33 || that.data[i].qxzt == 48 || that.data[i].qxzt == 43){
+                        if(that.data[i].qxzt == 10 || that.data[i].qxzt == 25 || that.data[i].qxzt == 23 || that.data[i].qxzt == 35 || that.data[i].qxzt == 33 || that.data[i].qxzt == 48 || that.data[i].qxzt == 43 || that.data[i].qxzt == 44 || that.data[i].qxzt == 233 || that.data[i].qxzt == 331 || that.data[i].qxzt == 49 || that.data[i].qxzt == 491){
                             if(that.data[i].topic.length == 2){
                                 var name = that.data[i].topic.substr(0,1)+"*";
                                 that.data[i].topic = name;

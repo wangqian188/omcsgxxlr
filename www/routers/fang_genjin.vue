@@ -66,7 +66,7 @@
                 <li class="clearfix" style="font-size: 0.32rem;border-bottom-left-radius:5px;border-bottom-right-radius:5px;box-shadow: 1px 1px 3px rgb(196,195,200);line-height: 1rem !important;" v-show="hzif">
                     <span class="ys_tit w170" style="width: 2rem !important;padding-left: 0.2rem;">合作意向：</span>
                     <div class="ys_item_con fl">
-                        <input type="text" value="" v-model.trim="hzyx" onfocus="this.blur()" placeholder="请选择" style="padding-left:34%;font-size: 0.32rem;width: 80%;" @click="openDecorationTypeHzyx">
+                        <input type="text" value="" v-model.trim="hzyx" onfocus="this.blur()" placeholder="请选择" style="padding-left:10%;font-size: 0.32rem;width: 80%;" @click="openDecorationTypeHzyx">
                         <i class="right_arrow" @click="openDecorationTypeHzyx">&gt;</i>
                     </div>
                 </li>
@@ -77,21 +77,29 @@
                     </div>
                 </div>
             </ul>
-            <div v-show="baocunzhih" style="background-color: #000;z-index:12;position: absolute;top:0;height:120%;opacity:0.8;overflow:hidden;">
-                <div style="padding: 0.5rem;margin: 0.2rem;color: white;margin-top: 50%;font-size: 0.34rem;">
-                    <div>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;已根据业主意向确认为代收房源，是否去填写跟进信息，若稍后填写可在“我的任务”中查看代收房源列表。
+            <div v-show="baocunzhih" style="background-color: rgba(0,0,0,0.5);z-index:12;position: absolute;top:0;height:110%;overflow:hidden;width: 100%;">
+                <div style="padding: 0.5rem;margin: 0.4rem;color: white;margin-top: 50%;font-size: 0.34rem;height: 5.8rem;background-color: white;border-radius: 8px;">
+                    <a href="javascript:;"><div style="background-color:#d7d7d9;width: 0.7rem;height: 0.7rem;margin-top: -0.5rem;margin-left: 5.5rem;border-bottom-left-radius: 80%;color: #9b9b9b;" @click="deletdij"><p style="font-size: 0.56rem;position: relative;left:0.2rem;transform: rotate(45deg);">+</p></div></a>
+                    <div style="color: rgb(255,90,90);margin-top: 0.3rem;text-align: center;font-size: 0.36rem;">
+                        保存成功！
+                    </div>
+                    <div style="margin-top: 0.3rem;color: black;text-align: center;font-size: 0.32rem;">
+                        您的跟进工单信息尚未完善
+                    </div>
+                    <div style="color: #999999;margin-top: 0.3rem;text-align: center;font-size: 0.28rem;">
+                        <div>您还可以在这找到</div>
+                        <div>（意向跟进-跟进工单）</div>
                     </div>
                     <a href="javascript:;" @click="xiazaq">
-                        <div style="float: left;width: 2rem;line-height: 0.8rem;margin-left: 0.5rem;background-color: #999999;padding-left: 0.5rem;margin-top: 0.2rem;">
-                            现在去
+                        <div style="float: left;width: 3rem;line-height: 0.8rem;margin-left: 1.4rem;background-color:rgb(53,134,242);margin-top: 0.6rem;text-align: center;border-radius: 5px;color: white;">
+                            去跟进
                         </div>
                     </a>
-                    <a href="javascript:;" @click="shaohzaq">
+                    <!--<a href="javascript:;" @click="shaohzaq">
                         <div style="float: right;width: 2rem;line-height: 0.8rem;margin-right: 1rem;background-color: #999999;padding-left: 0.3rem;margin-top: 0.2rem;">
                             稍后再去
                         </div>
-                    </a>
+                    </a>-->
                 </div>
             </div>
             <a href="javascript:;" class="ys_default_btn mb80" style="margin-top: 50%;" @click="saveInfo">保存</a>
@@ -523,6 +531,9 @@
                     Indicator.close()
                 });
             },
+            deletdij(){
+                this.baocunzhih = false;
+            },
             sfspAction(e){
                 const target = $(e.target), val = target.attr("value");
                 if(val == 1){
@@ -642,7 +653,7 @@
                         });
                         this.$http.post(
                             this.$api + "/yhcms/web/zdfyxx/saveFyzt.do",
-                            {"parameters":{"bzh":this.bezhu,"fyid":this.fyid,"gjzt1":fygjzt,"gjzt2":level1[this.fygjlx],"id":this.id,"jgzt":sfjg,"zszt":this.fyzsqk}}
+                            {"parameters":{"bzh":this.bezhu,"fyid":this.fyid,"gjzt1":fygjzt,"gjzt2":level1[this.fygjlx],"id":this.id,"jgzt":sfjg,"zszt":this.fyzsqk,"cookie":user22.sjs}}
                         ).then(function (res) {
                             Indicator.close();
                             var result = JSON.parse(res.bodyText);
@@ -661,10 +672,10 @@
                                     Indicator.close();
                                     var result = JSON.parse(res.bodyText);
                                     if (result.success) {
-                                        Toast({
+                                        /*Toast({
                                             message: '保存成功',
                                             duration: 1000
-                                        });
+                                        });*/
                                         this.fyyzid = result.fyyzid;
                                         if(this.hzyx == ""){
                                             setTimeout(function () {

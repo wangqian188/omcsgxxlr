@@ -15,24 +15,26 @@
     }
     .shyt{width:100% !important}
     .clearfix{line-height: 0.8rem !important;}
+    .addcss{background: url("../resources/images/fangyfx/genjinlist/add_jilu/1.png") no-repeat;
+        background-size: 100% 100%;}
 </style>
 <template>
     <div class="all_elements">
         <div class="build_top ele_wrap">
             <ul class="ys_item_ul mb60" style="margin:0.4rem 0.2rem;">
-                <div class="analy_item" style="padding: 0;line-height: 0.8rem;padding-left: 0.4rem;box-shadow: 1px 1px 3px rgb(196,195,200);border-radius:5px;">
+                <div class="analy_item addcss" style="padding: 0;line-height: 1rem;padding-left: 0.4rem;box-shadow: 1px 1px 3px rgb(196,195,200);border-radius:5px;">
                     <div class="analy_content">
-                        <span v-text="lpname" style="color: black;font-weight: 500;font-size: 0.36rem;"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                        <span v-text="zdhname" style="color: black;font-weight: 500;font-size: 0.36rem;"></span>
+                        <span v-text="lpname" style="color: white;font-weight: 500;font-size: 0.36rem;"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span v-text="zdhname" style="color: white;font-weight: 500;font-size: 0.36rem;"></span>
                     </div>
                 </div>
                 <div class="analy_item" style="font-size: 0.32rem;padding: 0;margin-top: 0.4rem;box-shadow: 1px 1px 3px rgb(196,195,200);border-radius:5px;">
                     <div class="analy_content" style="width: 7.1rem;height: 2rem;background-color: rgb(241,241,241);">
-                        <textarea name="" cols="30" rows="10" v-model="information" placeholder="请输入跟进记录..." style="padding-left: 0.4rem;font-size: 0.32rem;background-color: rgb(241,241,241);height: 2.6rem;"></textarea>
+                        <textarea name="" cols="30" rows="10" v-model="information" placeholder="请输入此房源的跟进情况..." style="padding-left: 0.4rem;font-size: 0.32rem;background-color: white;height: 3.6rem;"></textarea>
                     </div>
                 </div>
             </ul>
-            <a href="javascript:;" class="ys_default_btn mb80" style="margin-top: 50%;" @click="saveInfo">添加</a>
+            <a href="javascript:;" class="ys_default_btn addcss" style="margin-top: 80%;" @click="saveInfo">保存</a>
         </div>
 
         <!--商铺类型-->
@@ -451,7 +453,7 @@
         },
         mounted(){
             this.getInitData();
-            $('title').html("房源状态");
+            $('title').html("意向业主跟进记录");
 
         },
     }

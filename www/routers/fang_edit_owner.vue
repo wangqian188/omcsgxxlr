@@ -164,7 +164,6 @@
             selectTag(e){
                 const target = $(e.target), val = target.attr("value");
                 if(!val){return;}
-
                 if ($(e.target).hasClass('active')) {
                     let xgbq_t = new Set(this.xgbq);
                     xgbq_t.delete(val);
@@ -172,11 +171,18 @@
 
                     $(e.target).removeClass('active');
                 } else {
-                    let xgbq_t = new Set(this.xgbq);
-                    xgbq_t.add(val);
-                    this.xgbq = [...xgbq_t];
+                    if(this.xgbq.length < 5){
+                        let xgbq_t = new Set(this.xgbq);
+                        xgbq_t.add(val);
+                        this.xgbq = [...xgbq_t];
 
-                    $(e.target).addClass('active');
+                        $(e.target).addClass('active');
+                    }else{
+                        Toast({
+                            message: '性格标签最多选5个',
+                            position: 'middle'
+                        });
+                    }
                 }
             },
             addCy(e){
@@ -329,8 +335,6 @@
                     text: '保存中...',
                     spinnerType: 'fading-circle'
                 });
-                alert(1111);
-                console.log(this.xgbq);
                 this.$http.post(
                     this.$api + "/yhcms/web/zdfyxx/saveZdYzxx.do",
                     {
@@ -390,18 +394,26 @@
         },
         computed:{
             xgbq_t(){
-                alert(this.xgbq.length);
                 if(this.xgbq.length < 1){
                     return "请选择标签";
                 }
-                let tags = this.xgbq.map((t)=>{
-                    for(let i = 0; i < this.xgbq_all.length; ++i){
-                        if(this.xgbq_all[i].id === t){
-                            return this.xgbq_all[i].topic;
+                var xgbq = '';
+                if(this.xgbq.length < 6){
+                    let tags = this.xgbq.map((t)=>{
+                        for(let i = 0; i < this.xgbq_all.length; ++i){
+                            if(this.xgbq_all[i].id === t){
+                                return this.xgbq_all[i].topic;
+                            }
                         }
-                    }
-                });
-                return tags.join(",");
+                    });
+                    xgbq = tags;
+                }else{
+                    Toast({
+                        message: '性格标签最多选5个',
+                        position: 'bottom'
+                    });
+                }
+                return xgbq.join(",");
             }
         },
         mounted(){

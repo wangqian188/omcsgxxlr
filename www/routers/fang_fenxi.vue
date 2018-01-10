@@ -904,8 +904,8 @@
                         },
                         type: 'category',
                         boundaryGap: false,
-                        //data:['第一周','第二周','第三周','第四周','第五周','第六周','第七周','第八周']
-                        data:this.zhouqidata
+                        data:['第一周','第二周','第三周','第四周','第五周','第六周','第七周','第八周']
+                        //data:this.zhouqidata
                     }],
                     yAxis: {
                         type: 'value',

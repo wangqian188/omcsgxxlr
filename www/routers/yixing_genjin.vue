@@ -168,7 +168,7 @@
 
         </section>-->
         <a href="javascript:;" class="detail-search" style="position: fixed;left: 0; top: 0">
-            <input type="text" id="keyword" placeholder="请输入房源编号" maxlength="50" @focus="changeRou">
+            <input type="text" id="keyword" placeholder="请输入房源编号" v-model="fybh" maxlength="50" @focus="changeRou">
         </a>
         <!--<router-link class="bulid_msg_item"  :to="{path:'/fang_basic/'+ this.lpid + '/' + this.zdid + '/' + this.zdid1}" >
             <i class="basic_01"></i>
@@ -199,7 +199,17 @@
                                 <li data-role="filterItem" data-type="price">
                                     <a href="javascript:void(0);" @click="setPriceFilter">
                                         <h2 class="ellipsis price-h">按更新时间排序</h2>
-                                        <i class="filt-arrow"></i>
+                                       <!-- <i class="filt-arrow"></i>-->
+                                        <i class="" style="" >
+                                            <div style="width: 0.18rem;height: 0.17rem;margin-top: -0.2rem;padding-top: 0.1rem;margin-left: 0.2rem;">
+                                                <img v-if="imgif" src="../resources/images/fangyfx/genjinlist/yixingfenjin_list/2.png" style="width: 100%;" />
+                                                <img v-else src="../resources/images/fangyfx/genjinlist/yixingfenjin_list/3.png" style="width: 100%;" />
+                                            </div>
+                                            <div style="width: 0.18rem;height: 0.17rem;margin-left: 0.2rem;">
+                                                <img v-if="img2if" src="../resources/images/fangyfx/genjinlist/yixingfenjin_list/1.png" style="width: 100%;margin-top: 0.2rem;" />
+                                                <img v-else src="../resources/images/fangyfx/genjinlist/yixingfenjin_list/4.png" style="width: 100%;margin-top: 0.2rem;" />
+                                            </div>
+                                        </i>
                                     </a>
                                 </li>
                                 <li data-role="filterItem" data-type="state" :class="{'active-filter':this.currentFilterTab=='state'}">
@@ -338,7 +348,7 @@
                         infinite-scroll-immediate-check="checked">
 
                     <!--循环是获取索引下标index-->
-                    <li class="ys_listcon pv15" v-for="(item,index) in resultData" style="clear: both;">
+                    <li class="ys_listcon pv15" v-for="(item,index) in resultData" style="clear: both;border-bottom:1px solid rgb(228,228,228);">
                         <a href="javascript:;" class="supply_box" :fyid="item.id" :lpid="item.lpid" style="overflow: hidden;">
                             <dl class="supply">
                                 <dt @click="shadowShow">
@@ -358,7 +368,7 @@
                                     </dl>
                                 </dd>
                                 <dt style="clear: both;height: 0.5rem;margin-top: 0.3rem;float: left;font-size: 0.3rem;">{{item.time2}}</dt>
-                                <dd style="clear: both;height: 0.5rem;margin-top:-1.7rem;margin-left:6rem;float: left;font-size: 0.3rem;color: red;">{{item.h1}}</dd>
+                                <dd style="clear: both;height: 0.35rem;border-radius:2px;font-size: 0.22rem;margin-top:-1.7rem;margin-left:3.5rem;float: left;color: rgb(255,90,90);border:1px solid rgb(255,90,90);">意向等级{{item.h1}}</dd>
                                 <dd style="clear: both;float:right;margin-top: -0.5rem;" @click="gongdaif(index)">
                                     <a href="javascript:;"><img src="../resources/images/fangyfx/genjinlist/genjinlist.png" style="width: 0.6rem;"></a>
                                 </dd>
@@ -367,13 +377,13 @@
                                 <dd v-show="gdif==index && tag==true" style="clear: both;float:right;margin-top: -0.7rem;margin-right: 0.7rem;line-height: 0.8rem;width: 3rem;background-color: rgb(66,66,66);border-radius:5px;">
                                     <a href="javascript:;" :fyyzid="item.yxyzid" :fyid="item.id">
                                         <dl style="float: left;color: white;margin-left: 0.4rem;" @click="gongdanif">
-                                            <img src="../resources/images/fangyfx/genjinlist/1.png" style="width: 0.3rem;">&nbsp;工单
+                                            <img src="../resources/images/fangyfx/genjinlist/1.png" style="width: 0.3rem;margin-top: -0.05rem;">&nbsp;工单
                                         </dl>
                                     </a>
                                     <dl style="border-right: 1px solid black;width: 0.2rem;float: left;height: 0.5rem;margin-top: 0.15rem;margin-left: 0.1rem;"></dl>
                                     <a href="javascript:;" :fyyzid="item.yxyzid" :fyid="item.id">
                                         <dl style="float: right;color: white;margin-right: 0.2rem;" @click="jiluif">
-                                            <img src="../resources/images/fangyfx/genjinlist/2.png" style="width: 0.3rem;margin-top: -0.1rem;">&nbsp;记录
+                                            <img src="../resources/images/fangyfx/genjinlist/2.png" style="width: 0.4rem;margin-top: -0.1rem;">&nbsp;记录
                                         </dl>
                                     </a>
                                 </dd>
@@ -386,8 +396,9 @@
                     <mt-spinner type="fading-circle"></mt-spinner>
                 </p>
             </div>
+            <!--遮罩层的显示和隐藏以及它的样式-->
             <div class="mask" id="maskEl" @click="closeFilter"
-                 :class="{show:this.currentFilterTab=='district'||this.currentFilterTab=='feature'}">
+                 :class="{show:this.currentFilterTab=='district'||this.currentFilterTab=='feature'||this.currentFilterTab=='state'}">
             </div>
         </section>
         <!--context end-->
@@ -479,6 +490,8 @@
         data () {
             return {
                 tag:false,
+                imgif:true,
+                img2if:true,
                 gdif:-1,
                 govDistrictArray:[{fdcode:"0",fdname: "不限"},{fdcode:"1",fdname: "有效"},{fdcode:"2",fdname: "暂缓"},{fdcode:"3",fdname: "无效"}],
                 govDistrictArraysj:[],
@@ -511,6 +524,7 @@
                 subFeature: [],
                 para: {
                     "curr_page": 1,
+                    "search_keywork": "",
                 },
                 progress: "",
                 where:'',
@@ -518,7 +532,7 @@
             }
         },
         mounted(){
-            $('title').html('房源列表');
+            $('title').html('意向跟进');
             this.init();
 
             $(window).scroll(function () {
@@ -566,8 +580,9 @@
             init(){
                 const lpid = this.$route.params.lpid, zdid = this.$route.params.zdid;
                 /*this.fybh = this.$route.params.fybh;*/
-                if(this.$route['query']['keyword']){
-                    this.fybh = this.$route['query']['keyword'];
+                if(this.$route.query.keyword){
+                    this.fybh = this.$route.query.keyword;
+                    this.para.search_keywork = this.fybh;
                 }
                 this.lpid = lpid;
                 this.zdid = zdid;
@@ -602,12 +617,28 @@
                 this.$router.push({path: '/genjingongdan/'+this.fyyzid+'/'+fyyid});
             },
             jiluif(event){
+                localStorage.setItem('statue', 1);
                 const evt = (event || window.event), target = (evt.target || evt.srcElement), href = $(target).parents("a"), fyyzid=$(href).attr("fyyzid"), fyid=$(href).attr("fyid");
                 this.fyyzid = fyyzid;
                 const fyyid = fyid;
                 this.$router.push({path: '/genjinjilu/'+this.fyyzid+'/'+fyyid});
             },
             setPriceFilter(e){
+                if(this.imgif && this.img2if){
+                    this.imgif = false;
+                    this.img2if = !this.imgif;
+                }else{
+                    if(this.imgif){
+                        this.imgif = false;
+                        this.img2if = !this.imgif;
+                    }else{
+                        this.imgif = true;
+                        this.img2if = !this.imgif;
+                    }
+                }
+                this.para.curr_page = 1;
+                this.noMore = false;
+                this.loading = true;
                 const li = $(e.target).closest("li");
                 $(li).addClass("highlight").toggleClass("active-filter");
 
@@ -618,6 +649,7 @@
                     this.priceFilter = '1';
                 }
                 this.areaFilter = '';
+                this.resultData = [];
                 const that = this;
                 setTimeout(function(){
                     that.getData();
@@ -808,10 +840,12 @@
                 });
                 this.resultData = [];
                 this.para.curr_page = 1;
+                this.noMore = false;
+                this.loading = true;
                 this.getData();
             },
             getData(){
-                this.resultData = [];
+                //this.resultData = [];
                 let user22 = JSON.parse(localStorage.getItem('cook'));
                 Indicator.open({
                     text: '',
@@ -903,10 +937,14 @@
                 });
             },
             loadMore(){
-                if (!this.loading && !this.noMore) {
-                    this.loading = true;
-                    this.para.curr_page += 1;
-                    this.getData();
+                if(localStorage.getItem("statue")){
+                    localStorage.removeItem("statue");
+                }else{
+                    if (!this.loading && !this.noMore) {
+                        this.loading = true;
+                        this.para.curr_page += 1;
+                        this.getData();
+                    }
                 }
             },
             chooseFilter: function (e) {

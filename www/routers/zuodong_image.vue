@@ -147,7 +147,6 @@
                         this.saveimg = false;
                         if(this.il == ""){
                             this.imgqx = 2;
-                            this.imgxqx = 2;
                             this.saveimg = true;
                         }
                     }

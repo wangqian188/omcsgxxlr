@@ -31,8 +31,20 @@ var router = new VueRouter({
   routes: [
     {
       path: '/',
-      component: require('./routers/loupan_list.vue')
+      component: require('./routers/loupan_list.vue'),
+        meta: {
+            keepAlive: true
+        }
       /*component: require('./routers/fang_photo.vue')*/
+    },
+    {
+      path: '/test',
+      component: require('./routers/test.vue')
+      /*component: require('./routers/fang_photo.vue')*/
+    },
+    {
+      path: '/test1',
+      component: require('./routers/test1.vue')
     },
     {
       path: '/yixing_genjin',//意向业主跟进列表
@@ -52,7 +64,10 @@ var router = new VueRouter({
     },
     {
       path: '/index',
-      component: require('./routers/loupan_list.vue')
+      component: require('./routers/loupan_list.vue'),
+        meta: {
+            keepAlive: true
+        }
       /*component: require('./routers/fang_photo.vue')*/
     },
     {
@@ -290,7 +305,19 @@ var router = new VueRouter({
       path: '/uphtm',//系统跟新维护中的页面
       component: require('./routers/uphtm.vue')
     }
-  ]
+  ],
+    scrollBehavior (to, from, savedPosition) {
+        if (savedPosition) {
+            console.log(savedPosition)
+            return savedPosition
+        } else {
+            if (from.meta.keepAlive) {
+                console.log(from.meta.keepAlive)
+                from.meta.savedPosition = document.body.scrollTop;
+            }
+            return { x: 0, y: to.meta.savedPosition || 0 }
+        }
+    }
 });
 
 

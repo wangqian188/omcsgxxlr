@@ -4,13 +4,21 @@
         padding: 0 !important;
     }
     .cwkz{font-size: 0.38rem !important;font-weight: 900;margin-top: 0.5rem !important;margin: auto;width: 5rem;}
-    .sssj{color: #999999;border: 1px solid red;margin-top: 0.2rem !important;margin: auto;width: 1.5rem;}
+    .sssj{color: #999999;margin-top: 0.2rem !important;margin: auto;width: 1.5rem;}
 </style>
 <template>
-    <div style="background-color: white !important;border: 1px solid red;">
+    <div style="background-color: white !important;">
         <div class="cwkz"><span  v-text="xmname"></span>空置房源数据展示</div>
         <div class="sssj">实时数据</div>
         <div id="main" style="width:100%;height:400px;"></div>
+        <div style="margin: 0 auto;width:16rem;margin-bottom: 2rem;margin-top: 5rem;" @click="ddd">
+            <a href="javascript:;"><iframe width="100%" longdesc="http://192.168.21.73:7071/#/test1" vertical-align="middle" src="http://beyond.3dnest.cn/play/?m=zq_jw_1"></iframe></a>
+        </div>
+        <iframe frameborder="0" width="100%" height="100%" scrolling="no" useparentmsgbar="" hspace="0" src="" style="height: 860px;">
+            <iframe width="100%" vertical-align="middle" src="http://beyond.3dnest.cn/play/?m=zq_jw_1"></iframe>
+        </iframe>
+
+
     </div>
 </template>
 
@@ -35,7 +43,9 @@
             }
         },
         methods: {
-
+            ddd(){
+                alert(5555);
+            },
 
 
 
@@ -43,6 +53,7 @@
         },
 
         mounted(){
+
            /* $("#tjts").live("click",function(){
                 var myChart = echarts.init(document.getElementById("main1"));
                 var url='${contextPath}/fyfjxx/getByZdid.do?vurlcode=${sessionScope.sUrlCode}&zdid='+zdfyid;

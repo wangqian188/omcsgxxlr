@@ -21,34 +21,36 @@
 <template>
   <div class="all_elements">
     <div class="kbcss"></div>
-    <div class="build_top" style="height: 12.27rem;overflow: scroll;">
-      <h1 style="text-align:center;font-size:20px;background-color: #3a94f8;color: #FFFFFF !important;padding: 5px 20px;">租户信息</h1>
-      <table class="ys_item_ul mb20" style="width:100%;border-collapse: collapse;">
-        <tr style="background-color: white;"><td colspan="4" style="height: .2rem;"></td></tr>
-        <tr style="text-align:center;background-color: rgb(206,206,206);height: .7rem;">
-          <td style="width: 2.5rem;">姓名</td>
-          <!--<td style="width: 1.5rem;">性别</td>-->
-          <td style="width: 2.8rem;">联系方式</td>
-          <td>操作</td>
-        </tr>
-        <tr v-for="datum in data" class="clearfix pr" style="text-align:center;border-bottom: 1px solid rgb(206,206,206);height: .8rem;">
-          <td> <span class="ys_tit">{{datum.topic}}</span></td>
-         <!-- <td> <span class="ys_tit">{{datum.xb == "1" ? "男":""}}{{datum.xb == "0" ? "女":""}}</span></td>-->
-          <td><span>{{datum.lxfs}}</span></td>
-          <td v-if="xgsqfyqx == 1">
-            <i class="" :rent="datum.id" @click="modifyRent($event)">修改</i>&nbsp;&nbsp;&nbsp;
-            <i class="" :rent="datum.id" @click="modifyRentck($event)">查看</i>&nbsp;&nbsp;&nbsp;
-          </td>
-          <td v-else-if="xgsqfyqx == 2">
-            <i class="" :rent="datum.id" @click="modifyRent($event)">修改</i>
-            <i class="" :rent="datum.id" @click="modifyRentck($event)">查看</i>
-            <i class="" :rent="datum.id" @click="modifyRent1($event)">删除</i>
-          </td>
-          <td v-else>
-            <i class="" :rent="datum.id" @click="modifyRentck($event)">查看</i>&nbsp;&nbsp;&nbsp;
-          </td>
-        </tr>
-      </table>
+    <div class="build_top" style="height:100%;overflow: scroll;">
+      <div style="height:91%;overflow: scroll;">
+        <h1 style="text-align:center;font-size:20px;background-color: #3a94f8;color: #FFFFFF !important;padding: 5px 20px;">租户信息</h1>
+        <table class="ys_item_ul mb20" style="width:100%;border-collapse: collapse;">
+          <tr style="background-color: white;"><td colspan="4" style="height: .2rem;"></td></tr>
+          <tr style="text-align:center;background-color: rgb(206,206,206);height: .7rem;">
+            <td style="width: 2.5rem;">姓名</td>
+            <!--<td style="width: 1.5rem;">性别</td>-->
+            <td style="width: 2.8rem;">联系方式</td>
+            <td>操作</td>
+          </tr>
+          <tr v-for="datum in data" class="clearfix pr" style="text-align:center;border-bottom: 1px solid rgb(206,206,206);height: .8rem;">
+            <td> <span class="ys_tit">{{datum.topic}}</span></td>
+           <!-- <td> <span class="ys_tit">{{datum.xb == "1" ? "男":""}}{{datum.xb == "0" ? "女":""}}</span></td>-->
+            <td><span>{{datum.lxfs}}</span></td>
+            <td v-if="xgsqfyqx == 1">
+              <i class="" :rent="datum.id" @click="modifyRent($event)">修改</i>&nbsp;&nbsp;&nbsp;
+              <i class="" :rent="datum.id" @click="modifyRentck($event)">查看</i>&nbsp;&nbsp;&nbsp;
+            </td>
+            <td v-else-if="xgsqfyqx == 2">
+              <i class="" :rent="datum.id" @click="modifyRent($event)">修改</i>
+              <i class="" :rent="datum.id" @click="modifyRentck($event)">查看</i>
+              <i class="" :rent="datum.id" @click="modifyRent1($event)">删除</i>
+            </td>
+            <td v-else>
+              <i class="" :rent="datum.id" @click="modifyRentck($event)">查看</i>&nbsp;&nbsp;&nbsp;
+            </td>
+          </tr>
+        </table>
+      </div>
       <div class="tc bjt" style="position: fixed;bottom: 0px;width: 100%;height: 1rem;" v-if="tjzhqx" @click="addRent"><a href="javascript:;" style="position: relative;bottom: -0.25rem;" class="cl_link f30">+添加租户</a></div>
       <div class="tc bjt" style="position: fixed;bottom: 0px;width: 100%;height: 1rem;" v-else></div>
     </div>

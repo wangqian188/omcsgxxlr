@@ -63,13 +63,16 @@
                         <i class="right_arrow" @click="openDecorationType">&gt;</i>
                     </div>
                 </li>
-                <li class="clearfix" style="font-size: 0.32rem;border-bottom-left-radius:5px;border-bottom-right-radius:5px;box-shadow: 1px 1px 3px rgb(196,195,200);line-height: 1rem !important;" v-show="hzif">
+
+                <!--跟进工单-->
+                <!--<li class="clearfix" style="font-size: 0.32rem;border-bottom-left-radius:5px;border-bottom-right-radius:5px;box-shadow: 1px 1px 3px rgb(196,195,200);line-height: 1rem !important;" v-show="hzif">
                     <span class="ys_tit w170" style="width: 2rem !important;padding-left: 0.2rem;">合作意向：</span>
                     <div class="ys_item_con fl">
                         <input type="text" value="" v-model.trim="hzyx" onfocus="this.blur()" placeholder="请选择" style="padding-left:10%;font-size: 0.32rem;width: 80%;" @click="openDecorationTypeHzyx">
                         <i class="right_arrow" @click="openDecorationTypeHzyx">&gt;</i>
                     </div>
-                </li>
+                </li>-->
+
                 <div class="analy_item" style="font-size: 0.32rem;padding: 0;margin-top: 0.4rem;box-shadow: 1px 1px 3px rgb(196,195,200);border-radius:5px;">
                     <span class="analy_tit db" style="padding-left: 0.45rem;line-height: 0.8rem;">备注</span>
                     <div class="analy_content" style="width: 7.1rem;height: 2rem;background-color: rgb(241,241,241);">
@@ -672,18 +675,23 @@
                                     Indicator.close();
                                     var result = JSON.parse(res.bodyText);
                                     if (result.success) {
-                                        /*Toast({
+
+                                        Toast({
                                             message: '保存成功',
                                             duration: 1000
-                                        });*/
+                                        });
+
                                         this.fyyzid = result.fyyzid;
-                                        if(this.hzyx == ""){
+
+                                        /*跟进工单*/
+                                        /*if(this.hzyx == ""){*/
                                             setTimeout(function () {
                                                 history.go(-1);
                                             }, 1000);
-                                        }else{
+                                       /* }else{
                                             this.baocunzhih = true;
-                                        }
+                                        }*/
+
                                     } else {
                                         Toast({
                                             message: '保存失败: ' + result.message,

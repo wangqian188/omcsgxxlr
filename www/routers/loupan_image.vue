@@ -173,16 +173,14 @@
                         this.imgqx = 3;
                         this.imgxqx = 3;
                         this.saveqx = false;
-                        if(this.il < 5){
+                        if(this.il == 0){
                             this.imgqx = 2;
-                            this.imgxqx = 2;
                             this.saveqx = true;
                         }
                         this.imglpfmtqx = 3;
                         this.imglpfmtxqx = 3;
                         if(this.fl == 0){
                             this.imglpfmtqx = 2;
-                            this.imglpfmtxqx = 2;
                             this.saveqx = true;
                         }
                     }

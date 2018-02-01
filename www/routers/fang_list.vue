@@ -307,7 +307,10 @@
                       </dl>
                     </dd>
                     <span class="banc" v-if="item.zlzt == '航远'" style="position: relative;left:3.7rem;top: -1.2rem;width:50px;height:50px;display:block;"></span>
-                    <dd v-if="item.hzyx != 0 && item.zlzt == '非航远'" class="supply_color ellipsis" style="margin-top: -0.8rem;margin-left: 3.5rem;color: red;font-size: 0.3rem;">跟进中</dd>
+
+                    <!--跟进工单-->
+                    <!--<dd v-if="item.hzyx != 0 && item.zlzt == '非航远'" class="supply_color ellipsis" style="margin-top: -0.8rem;margin-left: 3.5rem;color: red;font-size: 0.3rem;">跟进中</dd>-->
+
                   </dl>
                 </dd>
               </dl>

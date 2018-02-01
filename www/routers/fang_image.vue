@@ -210,23 +210,20 @@
                   this.imgqx = 3;
                   this.imgxqx = 3;
                   this.saveqx = false;
-                  if (this.fy<8) {
+                  if (this.fy == 0) {
                       this.imgqx = 2;
-                      this.imgxqx = 2;
                       this.saveqx = true;
                   }
                   this.imghxqx = 3;
                   this.imghxxqx = 3;
                   if (this.hx == 0) {
                       this.imghxqx = 2;
-                      this.imghxxqx = 2;
                       this.saveqx = true;
                   }
                   this.imgfmqx = 3;
                   this.imgfmxqx = 3;
                   if (this.fm == 0) {
                       this.imgfmqx = 2;
-                      this.imgfmxqx = 2;
                       this.saveqx = true;
                   }
                   $("input").attr('placeholder',"");

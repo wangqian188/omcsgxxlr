@@ -21,36 +21,38 @@
 <template>
   <div class="all_elements">
     <div class="kbcss"></div>
-    <div class="build_top" style="height: 12rem;overflow: scroll;">
-      <h1 style="text-align:center;font-size:20px;background-color: #3a94f8;color: #FFFFFF !important;padding: 5px 20px;">代理人信息</h1>
-      <table class="ys_item_ul mb20" style="width:100%;border-collapse: collapse;">
-        <tr style="background-color: white;"><td colspan="4" style="height: .2rem;"></td></tr>
-        <tr style="text-align:center;background-color: rgb(206,206,206);height: .7rem;">
-          <td style="width: 1.5rem;">姓名</td>
-          <td style="width: 1.5rem;">性别</td>
-          <td style="width: 2.8rem;">联系方式</td>
-          <td>操作</td>
-        </tr>
-        <tr v-for="datum in data" class="clearfix pr" style="text-align:center;border-bottom: 1px solid rgb(206,206,206);height: .8rem;">
-            <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43" style="word-break:break-all;">  <span class="ys_tit">{{datum.topic}}</span></td>
-            <td v-else style="word-break:break-all;">  <span class="ys_tit">{{datum.topic}}</span></td>
-            <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43">   <span class="ys_tit">{{datum.xb=="1"?"男":""}}{{datum.xb=="0"?"女":""}}</span></td>
-            <td v-else>  <span class="ys_tit">{{datum.xb=="1"?"男":""}}{{datum.xb=="0"?"女":""}}</span></td>
-            <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43">  <span>{{datum.phone}}</span></td>
-            <td v-else>  <span>{{datum.phone}}</span></td>
-            <td style="width: 2rem;" v-if="datum.qxzt == 1 || datum.qxzt == 21 || datum.qxzt == 22 || datum.qxzt == 31 || datum.qxzt == 32 || datum.qxzt == 46 || datum.qxzt == 50 || datum.qxzt == 42 || datum.qxzt == 44 || datum.qxzt == 49">
-                <i class="" :agent="datum.id" @click="modifyAgent($event)">修改</i>
-                <i class="" :agent="datum.id" @click="modifyAgentck($event)">查看</i>
-                <i class="" :agent="datum.id" @click="modifyAgent1($event)">删除</i>
-            </td>
-            <td style="width: 2rem;" v-if="datum.qxzt == 3 || datum.qxzt == 11 || datum.qxzt == 24 || datum.qxzt == 20 || datum.qxzt == 34 || datum.qxzt == 30 || datum.qxzt == 41 || datum.qxzt == 47 || datum.qxzt == 45">
-                <i class="" :agent="datum.id" @click="modifyAgentck($event)">查看</i>&nbsp;&nbsp;&nbsp;
-            </td>
-          <td style="width: 2rem;" v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43">
+    <div class="build_top" style="height:100%;">
+        <div style="height:91%;overflow: scroll;">
+          <h1 style="text-align:center;font-size:20px;background-color: #3a94f8;color: #FFFFFF !important;padding: 5px 20px;">代理人信息</h1>
+          <table class="ys_item_ul mb20" style="width:100%;border-collapse: collapse;">
+            <tr style="background-color: white;"><td colspan="4" style="height: .2rem;"></td></tr>
+            <tr style="text-align:center;background-color: rgb(206,206,206);height: .7rem;">
+              <td style="width: 1.5rem;">姓名</td>
+              <td style="width: 1.5rem;">性别</td>
+              <td style="width: 2.8rem;">联系方式</td>
+              <td>操作</td>
+            </tr>
+            <tr v-for="datum in data" class="clearfix pr" style="text-align:center;border-bottom: 1px solid rgb(206,206,206);height: .8rem;">
+                <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43" style="word-break:break-all;">  <span class="ys_tit">{{datum.topic}}</span></td>
+                <td v-else style="word-break:break-all;">  <span class="ys_tit">{{datum.topic}}</span></td>
+                <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43">   <span class="ys_tit">{{datum.xb=="1"?"男":""}}{{datum.xb=="0"?"女":""}}</span></td>
+                <td v-else>  <span class="ys_tit">{{datum.xb=="1"?"男":""}}{{datum.xb=="0"?"女":""}}</span></td>
+                <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43">  <span>{{datum.phone}}</span></td>
+                <td v-else>  <span>{{datum.phone}}</span></td>
+                <td style="width: 2rem;" v-if="datum.qxzt == 1 || datum.qxzt == 21 || datum.qxzt == 22 || datum.qxzt == 31 || datum.qxzt == 32 || datum.qxzt == 46 || datum.qxzt == 50 || datum.qxzt == 42 || datum.qxzt == 44 || datum.qxzt == 49">
+                    <i class="" :agent="datum.id" @click="modifyAgent($event)">修改</i>
+                    <i class="" :agent="datum.id" @click="modifyAgentck($event)">查看</i>
+                    <i class="" :agent="datum.id" @click="modifyAgent1($event)">删除</i>
+                </td>
+                <td style="width: 2rem;" v-if="datum.qxzt == 3 || datum.qxzt == 11 || datum.qxzt == 24 || datum.qxzt == 20 || datum.qxzt == 34 || datum.qxzt == 30 || datum.qxzt == 41 || datum.qxzt == 47 || datum.qxzt == 45">
+                    <i class="" :agent="datum.id" @click="modifyAgentck($event)">查看</i>&nbsp;&nbsp;&nbsp;
+                </td>
+              <td style="width: 2rem;" v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43">
 
-          </td>
-        </tr>
-      </table>
+              </td>
+            </tr>
+          </table>
+        </div>
       <div class="tc bjt" style="position: fixed;bottom: 0px;width: 100%;height: 1rem;" v-if="tjdlrqx" @click="addAgent"><a href="javascript:;" style="position: relative;bottom: -0.25rem;display: block;" class="cl_link f30">+添加代理人</a></div>
       <div class="tc bjt" style="position: fixed;bottom: 0px;width: 100%;height: 1rem;" v-else></div>
     </div>
@@ -82,7 +84,7 @@
                     this.qxzt = data.qxzt;
                     //data.qxzt = 1;
 
-                    if(data.fyzt == 1 || data.ryzt == 1){
+                    if(data.fyzt == 1){
                         this.tjdlrqx=false;
                     }else{
                         this.tjdlrqx=true;

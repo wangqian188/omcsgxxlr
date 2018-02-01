@@ -295,8 +295,8 @@
                         this.$router.push({path: '/login'});
                     }
                     if(data.ryzt == 1){
-                        this.tjwygsqx = false;
-                        this.wyqdqx = false;
+                        this.tjwygsqx = true;
+                        this.wyqdqx = true;
                     }else{
                         this.tjwygsqx = true;
                         this.wyqdqx = true;

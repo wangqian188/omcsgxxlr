@@ -32,10 +32,11 @@
     .meiyshjzit{margin-top: 0.5rem;margin-left: 2rem;color: rgb(254,122,14);height: 3rem;   }
     .fyfexiimg{line-height: .4rem !important;}
     .fyfxxzl{width: 1.6rem;float: left;margin-left: 0.2rem;margin-top: 0.4rem;font-size:0.24rem;border-radius:5px;border: 0px solid rgb(137,217,226);border-bottom: 0px solid rgb(137,217,226) !important;}
+    .kzfyss{padding-top: 0.1px;}
 </style>
 <template>
     <div>
-        <div style="background-color: white !important;">
+        <div style="background-color: white !important;" class="kzfyss">
             <div class="cwkz"><span></span>空置房源数据展示</div>
             <div class="sssj">实时数据</div>
             <div v-if="manxsh">
@@ -47,7 +48,7 @@
             </div>
             <div v-else id="main" style="width:100%;height:8.5rem;"></div>
         </div>
-        <div style="background-color: white !important;margin-top: 0.2rem;">
+        <div style="background-color: white !important;margin-top: 0.2rem;" class="kzfyss">
             <div class="cwkz" style="width: 5.3rem !important;"><span></span>已入住企业类型占比</div>
             <div class="sssj">实时数据</div>
             <div v-if="manxsh1">
@@ -59,7 +60,7 @@
             </div>
             <div v-else id="main1" style="width:100%;height:9.5rem;"></div>
         </div>
-        <div style="background-color: white !important;margin-top: 0.2rem;">
+        <div style="background-color: white !important;margin-top: 0.2rem;" class="kzfyss">
             <div class="cwkz" style="width: 5.3rem !important;"><span></span>八周市场均价走势</div>
             <div class="sssj" style="width: 2rem !important;">单位：元/㎡/天</div>
             <div v-if="manxsh2">
@@ -71,7 +72,7 @@
             </div>
             <div v-else id="main2" style="width:100%;height:8rem;"></div>
         </div>
-        <div style="background-color: white !important;margin-top: 0.2rem;">
+        <div style="background-color: white !important;margin-top: 0.2rem;" class="kzfyss">
             <div class="cwkz" style="width: 5.3rem !important;"><span></span>周边项目空置竞争房源对比</div>
             <div class="sssj" style="width: 2rem !important;">实时数据</div>
             <div style="height:0.4rem;border-bottom:1px solid #dbdadf;"></div>
@@ -273,6 +274,7 @@
                 resuldata9:[],
                 resuldata10:[],
                 zhouqidata:[],
+                zhoudata:[],
                 zhouqigydata:[],
                 zhouqiswldata:[],
                 zhouqisydata:[],
@@ -299,61 +301,66 @@
                 this.$http.post(url,{"lpid":lpid}).then((res)=>{
                     Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
-                    if(data.total != 0){
-                        this.manxsh = false;
-                        const result = JSON.parse(res.bodyText);
-                        that.topic = result.topic;//楼盘名称
-                        that.wdqfy = data.w4;//未到期房源
-                        that.swdqfy = data.w2;//45天内到期房源
-                        that.qsdqfy = data.w3;//90天内到期房源
-                        that.xxbq = data.w1;//信息不全
-                        that.kzfy = data.kzcount;//可出租房源(空置房源)
-                        that.wzfy = data.wzcount;//未知房源
-                        that.yzfy = data.yzcount;//已租房源
-                        if(this.kzfy != 0){
-                            this.tpdata1.push({value:this.kzfy,name:'空置房源'});
-                            this.hxys.push('rgb(195,52,48)');//咖啡色
-                        }
-                        if(this.yzfy != 0){
-                            this.tpdata1.push({value:this.yzfy,name:'已租房源'});
-                            this.hxys.push('rgb(48,68,84)');//橘红色（未知房源）
-                        }
-                        if(this.wzfy != 0){
-                            this.tpdata1.push({value:this.wzfy,name:'未知房源'});
-                            this.hxys.push('rgb(96,161,169)');//红色（已租房源）
-                        }
-                        if(this.kzfy != 0){
-                            this.tpdata.push({value:this.kzfy,name:'可出租房源'});
-                            this.hxys.push('rgb(213,131,101)');//蓝色
-                        }
-                        if(this.wdqfy != 0){
-                            this.tpdata.push({value:this.wdqfy,name:'未到期房源'});
-                            this.hxys.push('rgb(146,199,176)');//深绿色
-                        }
-                        if(this.qsdqfy != 0){
-                            this.tpdata.push({value:this.qsdqfy,name:'90天内到\n期房源'});
-                            this.hxys.push('rgb(116,159,131)');
-                        }//橙色
-                        if(this.swdqfy != 0){
-                            this.tpdata.push({value:this.swdqfy,name:'45天内到\n期房源'});
-                            this.hxys.push('rgb(203,136,35)');//黄色
-                        }
-                        if(this.xxbq != 0){
-                            this.tpdata.push({value:this.xxbq,name:'信息不全'});
-                            this.hxys.push('rgb(189,163,155)');//草绿色
-                        }
-                        this.pic();
-                    }else{
+
+                    if(data.w4 == 0 && data.w2 == 0 && data.w3 == 0 && data.w1 == 0 && data.kzcount == 0 && data.wzcount == 0 && data.yzcount == 0){
                         this.manxsh = true;
+                    }else{
+                        if(data.total != 0){
+                            this.manxsh = false;
+                            const result = JSON.parse(res.bodyText);
+                            that.topic = result.topic;//楼盘名称
+                            that.wdqfy = data.w4;//未到期房源
+                            that.swdqfy = data.w2;//45天内到期房源
+                            that.qsdqfy = data.w3;//90天内到期房源
+                            that.xxbq = data.w1;//信息不全
+                            that.kzfy = data.kzcount;//可出租房源(空置房源)
+                            that.wzfy = data.wzcount;//未知房源
+                            that.yzfy = data.yzcount;//已租房源
+                            if(this.kzfy != 0){
+                                this.tpdata1.push({value:this.kzfy,name:'空置房源'});
+                                this.hxys.push('rgb(195,52,48)');//咖啡色
+                            }
+                            if(this.yzfy != 0){
+                                this.tpdata1.push({value:this.yzfy,name:'已租房源'});
+                                this.hxys.push('rgb(48,68,84)');//橘红色（未知房源）
+                            }
+                            if(this.wzfy != 0){
+                                this.tpdata1.push({value:this.wzfy,name:'未知房源'});
+                                this.hxys.push('rgb(96,161,169)');//红色（已租房源）
+                            }
+                            if(this.kzfy != 0){
+                                this.tpdata.push({value:this.kzfy,name:'可出租房源'});
+                                this.hxys.push('rgb(213,131,101)');//蓝色
+                            }
+                            if(this.wdqfy != 0){
+                                this.tpdata.push({value:this.wdqfy,name:'未到期房源'});
+                                this.hxys.push('rgb(146,199,176)');//深绿色
+                            }
+                            if(this.qsdqfy != 0){
+                                this.tpdata.push({value:this.qsdqfy,name:'90天内到\n期房源'});
+                                this.hxys.push('rgb(116,159,131)');
+                            }//橙色
+                            if(this.swdqfy != 0){
+                                this.tpdata.push({value:this.swdqfy,name:'45天内到\n期房源'});
+                                this.hxys.push('rgb(203,136,35)');//黄色
+                            }
+                            if(this.xxbq != 0){
+                                this.tpdata.push({value:this.xxbq,name:'信息不全'});
+                                this.hxys.push('rgb(189,163,155)');//草绿色
+                            }
+                            this.pic();
+                        }else{
+                            this.manxsh = true;
+                        }
                     }
                     /*this.tpdata.push({value:this.kzfy,name:'可出租房源'});
-                    this.tpdata1.push({value:this.kzfy,name:'空置房源'});
-                    this.tpdata.push({value:this.wdqfy,name:'未到期房源'});
-                    this.tpdata.push({value:this.qsdqfy,name:'90天内到\n期房源'});
-                    this.tpdata.push({value:this.swdqfy,name:'45天内到\n期房源'});
-                    this.tpdata.push({value:this.xxbq,name:'信息不全'});
-                    this.tpdata1.push({value:this.wzfy,name:'未知房源'});
-                    this.tpdata1.push({value:this.yzfy,name:'已租房源'});*/
+                     this.tpdata1.push({value:this.kzfy,name:'空置房源'});
+                     this.tpdata.push({value:this.wdqfy,name:'未到期房源'});
+                     this.tpdata.push({value:this.qsdqfy,name:'90天内到\n期房源'});
+                     this.tpdata.push({value:this.swdqfy,name:'45天内到\n期房源'});
+                     this.tpdata.push({value:this.xxbq,name:'信息不全'});
+                     this.tpdata1.push({value:this.wzfy,name:'未知房源'});
+                     this.tpdata1.push({value:this.yzfy,name:'已租房源'});*/
                     $('title').html(that.topic);
                 }, (res)=>{
                     Indicator.close()
@@ -416,8 +423,7 @@
                 this.$http.post(url2,{"lpid":lpid}).then((res)=>{
                     Indicator.close();
                     const data = JSON.parse(res.bodyText);
-                    if(data.data){
-
+                    if(data.data || data.data2 || data.data3 || data.data5){
                         this.manxsh2 = false;
                         if(data.data){
                             var count = data.data.length;
@@ -443,7 +449,7 @@
                             }
                             if(count >= 6){
                                 this.scjjdata.push({value:data.data[5].zxjnjg});
-                                this.zhouqidata.push({value:data[5].time1});
+                                this.zhouqidata.push({value:data.data[5].time1});
                             }
                             if(count >= 7){
                                 this.scjjdata.push({value:data.data[6].zxjnjg});
@@ -478,7 +484,7 @@
                             }
                             if(count2 >= 6){
                                 this.scjjgydata.push({value:data.data2[5].zxjnjg});
-                                this.zhouqigydata.push({value:data2[5].time1});
+                                this.zhouqigydata.push({value:data.data2[5].time1});
                             }
                             if(count2 >= 7){
                                 this.scjjgydata.push({value:data.data2[6].zxjnjg});
@@ -513,7 +519,7 @@
                             }
                             if(count3 >= 6){
                                 this.scjjswldata.push({value:data.data3[5].zxjnjg});
-                                this.zhouqiswldata.push({value:data3[5].time1});
+                                this.zhouqiswldata.push({value:data.data3[5].time1});
                             }
                             if(count3 >= 7){
                                 this.scjjswldata.push({value:data.data3[6].zxjnjg});
@@ -548,7 +554,7 @@
                             }
                             if(count5 >= 6){
                                 this.scjjsydata.push({value:data.data5[5].zxjnjg});
-                                this.zhouqisydata.push({value:data5[5].time1});
+                                this.zhouqisydata.push({value:data.data5[5].time1});
                             }
                             if(count5 >= 7){
                                 this.scjjsydata.push({value:data.data5[6].zxjnjg});
@@ -559,7 +565,35 @@
                                 this.zhouqisydata.push({value:data.data5[7].time1});
                             }
                         }
-
+                        this.zhoudata[0] = this.zhouqidata.length;
+                        this.zhoudata[1] = this.zhouqigydata.length;
+                        this.zhoudata[2] = this.zhouqiswldata.length;
+                        this.zhoudata[3] = this.zhouqisydata.length;
+                        var leng = Math.max.apply(null,this.zhoudata);
+                        if(leng == 1){
+                            this.zhouqidata = ["第一周"];
+                        }
+                        if(leng == 2){
+                            this.zhouqidata = ["第一周","第二周"];
+                        }
+                        if(leng == 3){
+                            this.zhouqidata = ["第一周","第二周","第三周"];
+                        }
+                        if(leng == 4){
+                            this.zhouqidata = ["第一周","第二周","第三周","第四周"];
+                        }
+                        if(leng == 5){
+                            this.zhouqidata = ["第一周","第二周","第三周","第四周","第五周"];
+                        }
+                        if(leng == 6){
+                            this.zhouqidata = ["第一周","第二周","第三周","第四周","第五周","第六周"];
+                        }
+                        if(leng == 7){
+                            this.zhouqidata = ["第一周","第二周","第三周","第四周","第五周","第六周","第七周"];
+                        }
+                        if(leng == 8){
+                            this.zhouqidata = ["第一周","第二周","第三周","第四周","第五周","第六周","第七周","第八周"];
+                        }
                         this.zhex();
                     }else{
                         this.manxsh2 = true;
@@ -785,47 +819,47 @@
                     },
                     color:this.hxys,//设置扇形图固定的颜色
                     series: [{
-                            name:'',
-                            type:'pie',
-                            radius: ['35%', '50%'],
-                            center:['50%','40%'],//环形图位置的参数
-                            //radius: ['30%', '45%'],
-                            label: {
-                                normal: {
-                                    /*formatter: '{b|{b}:\n}{c}\n{per|{d}%}\n',*/
-                                    formatter: '\n{b|{b}:\n}{c}\n{per|{d}%}\n',
-                                    /*backgroundColor: '#eee',//图上大的背景色
-                                     borderColor: '#aaa',*/
-                                    borderWidth: 1,
-                                    borderRadius: 4,
-                                    rich: {
-                                        /*a: {
-                                         color: '#999',
-                                         lineHeight: 22,
-                                         align: 'center'
-                                         },*/
-                                        /* hr: {
-                                         borderColor: '#aaa',
-                                         width: '100%',
-                                         borderWidth: 0.5,
-                                         height: 0
-                                         },*/
-                                        b: {
-                                            fontSize: 10,
-                                            lineHeight: 24,
-                                            width:5,
-                                        },
-                                        per: {
-                                            color: '#eee',
-                                            backgroundColor: '#334455',
-                                            padding: [2, 2],
-                                            borderRadius: 2
-                                        }
+                        name:'',
+                        type:'pie',
+                        radius: ['35%', '50%'],
+                        center:['50%','40%'],//环形图位置的参数
+                        //radius: ['30%', '45%'],
+                        label: {
+                            normal: {
+                                /*formatter: '{b|{b}:\n}{c}\n{per|{d}%}\n',*/
+                                formatter: '\n{b|{b}:\n}{c}\n{per|{d}%}\n',
+                                /*backgroundColor: '#eee',//图上大的背景色
+                                 borderColor: '#aaa',*/
+                                borderWidth: 1,
+                                borderRadius: 4,
+                                rich: {
+                                    /*a: {
+                                     color: '#999',
+                                     lineHeight: 22,
+                                     align: 'center'
+                                     },*/
+                                    /* hr: {
+                                     borderColor: '#aaa',
+                                     width: '100%',
+                                     borderWidth: 0.5,
+                                     height: 0
+                                     },*/
+                                    b: {
+                                        fontSize: 10,
+                                        lineHeight: 24,
+                                        width:5,
+                                    },
+                                    per: {
+                                        color: '#eee',
+                                        backgroundColor: '#334455',
+                                        padding: [2, 2],
+                                        borderRadius: 2
                                     }
                                 }
-                            },
-                            data:this.tpdata,
-                        }
+                            }
+                        },
+                        data:this.tpdata,
+                    }
                     ],
 
                 };
@@ -888,14 +922,14 @@
                     toolbox: {
                         show: true,
                         /*feature: {
-                            dataZoom: {
-                                yAxisIndex: 'none'
-                            },
-                            dataView: {readOnly: false},
-                            magicType: {type: ['line', 'bar']},
-                            restore: {},
-                            //saveAsImage: {}//控制保存按钮
-                        }*/
+                         dataZoom: {
+                         yAxisIndex: 'none'
+                         },
+                         dataView: {readOnly: false},
+                         magicType: {type: ['line', 'bar']},
+                         restore: {},
+                         //saveAsImage: {}//控制保存按钮
+                         }*/
                     },
                     xAxis: [{
                         axisLabel: {
@@ -904,8 +938,8 @@
                         },
                         type: 'category',
                         boundaryGap: false,
-                        data:['第一周','第二周','第三周','第四周','第五周','第六周','第七周','第八周']
-                        //data:this.zhouqidata
+                        //data:['第一周','第二周','第三周','第四周','第五周','第六周','第七周','第八周']
+                        data:this.zhouqidata
                     }],
                     yAxis: {
                         type: 'value',
@@ -1045,19 +1079,19 @@
                             this.manxsh3 = true;
                         }
                         /*for(var i=0;i<data.length;i++){
-                            if(data[i].jnjg){
-                                var dgdata = data[i].jnjg;
-                                dgdata = parseInt(dgdata);
-                                dgdata = dgdata/(15);
-                                data[i].jnjg = dgdata*100;
-                                data[i].jnjg = data[i].jnjg + "%";
-                            }
-                        }*/
+                         if(data[i].jnjg){
+                         var dgdata = data[i].jnjg;
+                         dgdata = parseInt(dgdata);
+                         dgdata = dgdata/(15);
+                         data[i].jnjg = dgdata*100;
+                         data[i].jnjg = data[i].jnjg + "%";
+                         }
+                         }*/
                     }, (res)=>{
                         Indicator.close()
                     });
                 }else if(this.sctype == 3){
-                        const url2 = this.$api + "/yhcms/web/jcsj/wxXszq.do";
+                    const url2 = this.$api + "/yhcms/web/jcsj/wxXszq.do";
                     this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj,"chqxz":this.chqnxz}).then((res)=>{
                         Indicator.close();
                         const data = JSON.parse(res.bodyText).data;
@@ -1092,14 +1126,14 @@
                             this.manxsh3 = true;
                         }
                         /*for(var i=0;i<data.length;i++){
-                            if(data[i].xszq){
-                                var dgdata = data[i].xszq;
-                                dgdata = parseInt(dgdata);
-                                dgdata = dgdata/(30);
-                                data[i].xszq = dgdata*100;
-                                data[i].xszq = data[i].xszq + "%";
-                            }
-                        }*/
+                         if(data[i].xszq){
+                         var dgdata = data[i].xszq;
+                         dgdata = parseInt(dgdata);
+                         dgdata = dgdata/(30);
+                         data[i].xszq = dgdata*100;
+                         data[i].xszq = data[i].xszq + "%";
+                         }
+                         }*/
                     }, (res)=>{
                         Indicator.close()
                     });
@@ -1164,14 +1198,14 @@
                             this.manxsh3 = true;
                         }
                         /*for(var i=0;i<data.length;i++){
-                            if(data[i].kzcount){
-                                var dgdata = data[i].kzcount;
-                                dgdata = parseInt(dgdata);
-                                dgdata = dgdata/(20);
-                                data[i].kzcount = dgdata*100;
-                                data[i].kzcount = data[i].kzcount + "%";
-                            }
-                        }*/
+                         if(data[i].kzcount){
+                         var dgdata = data[i].kzcount;
+                         dgdata = parseInt(dgdata);
+                         dgdata = dgdata/(20);
+                         data[i].kzcount = dgdata*100;
+                         data[i].kzcount = data[i].kzcount + "%";
+                         }
+                         }*/
                     }, (res)=>{
                         Indicator.close()
                     });
@@ -1246,15 +1280,15 @@
                         this.manxsh3 = true;
                     }
                     //计算百分比
-                   /* for(var i=0;i<data.length;i++){
-                        if(data[i].kzcount){
-                            var dgdata = data[i].kzcount;
-                            dgdata = parseInt(dgdata);
-                            dgdata = dgdata/(20);
-                            data[i].kzcount = dgdata*100;
-                            data[i].kzcount = data[i].kzcount + "%";
-                        }
-                    }*/
+                    /* for(var i=0;i<data.length;i++){
+                     if(data[i].kzcount){
+                     var dgdata = data[i].kzcount;
+                     dgdata = parseInt(dgdata);
+                     dgdata = dgdata/(20);
+                     data[i].kzcount = dgdata*100;
+                     data[i].kzcount = data[i].kzcount + "%";
+                     }
+                     }*/
                 }, (res)=>{
                     Indicator.close()
                 });
@@ -1303,15 +1337,15 @@
                         this.manxsh3 = true;
                     }
                     //计算百分比
-                   /* for(var i=0;i<data.length;i++){
-                        if(data[i].jnjg){
-                            var dgdata = data[i].jnjg;
-                            dgdata = parseInt(dgdata);
-                            dgdata = dgdata/(15);
-                            data[i].jnjg = dgdata*100;
-                            data[i].jnjg = data[i].jnjg + "%";
-                        }
-                    }*/
+                    /* for(var i=0;i<data.length;i++){
+                     if(data[i].jnjg){
+                     var dgdata = data[i].jnjg;
+                     dgdata = parseInt(dgdata);
+                     dgdata = dgdata/(15);
+                     data[i].jnjg = dgdata*100;
+                     data[i].jnjg = data[i].jnjg + "%";
+                     }
+                     }*/
                 }, (res)=>{
                     Indicator.close()
                 });
@@ -1360,14 +1394,14 @@
                     }
                     //计算百分比
                     /*for(var i=0;i<data.length;i++){
-                        if(data[i].xszq){
-                            var dgdata = data[i].xszq;
-                            dgdata = parseInt(dgdata);
-                            dgdata = dgdata/(30);
-                            data[i].xszq = dgdata*100;
-                            data[i].xszq = data[i].xszq + "%";
-                        }
-                    }*/
+                     if(data[i].xszq){
+                     var dgdata = data[i].xszq;
+                     dgdata = parseInt(dgdata);
+                     dgdata = dgdata/(30);
+                     data[i].xszq = dgdata*100;
+                     data[i].xszq = data[i].xszq + "%";
+                     }
+                     }*/
                 }, (res)=>{
                     Indicator.close()
                 });
@@ -1375,142 +1409,142 @@
             //柱形图
             zhuxing1(){
                 /*alert(1111);
-                // 基于准备好的dom，初始化echarts实例
-                var myChart = echarts.init(document.getElementById('main3'));
-                // 指定图表的配置项和数据
-                var builderJson = {
-                    "charts":this.resuldata,
-                };
+                 // 基于准备好的dom，初始化echarts实例
+                 var myChart = echarts.init(document.getElementById('main3'));
+                 // 指定图表的配置项和数据
+                 var builderJson = {
+                 "charts":this.resuldata,
+                 };
 
-                var waterMarkText = 'ECHARTS';
+                 var waterMarkText = 'ECHARTS';
 
-                var canvas = document.createElement('canvas');
-                var ctx = canvas.getContext('2d');
-                canvas.width = canvas.height = 100;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.globalAlpha = 0.08;
-                ctx.font = '20px Microsoft Yahei';
-                ctx.translate(50, 50);
-                ctx.rotate(-Math.PI / 4);
-                ctx.fillText(waterMarkText, 0, 0);
+                 var canvas = document.createElement('canvas');
+                 var ctx = canvas.getContext('2d');
+                 canvas.width = canvas.height = 100;
+                 ctx.textAlign = 'center';
+                 ctx.textBaseline = 'middle';
+                 ctx.globalAlpha = 0.08;
+                 ctx.font = '20px Microsoft Yahei';
+                 ctx.translate(50, 50);
+                 ctx.rotate(-Math.PI / 4);
+                 ctx.fillText(waterMarkText, 0, 0);
 
-                var option = {
-                    legend: {
-                        data: []
-                    },
-                    backgroundColor: {
-                        type: 'pattern',
-                        backgroundColor: '#FFFFFF',
-                        borderColor: '#FFFFFF',
-                        repeat: 'repeat'
-                    },
-                    grid: [{
-                        top: 50,
-                        width: '80%',
-                        height: '80%',
-                        bottom: '25%',
-                        left: 10,
-                        containLabel: true
-                    }, {
-                        top: '55%',
-                        width: '50%',
-                        bottom: 0,
-                        left: 10,
-                        containLabel: true
-                    }],
-                    xAxis: {
-                        type: 'value',
-                        max: builderJson.all,
-                        show: false,//false是不显示x轴
-                        axisTick: {width:10},//length后面这个数字用来设置坐标轴刻度的长度
-                        splitLine: {
-                            show: false
-                        }
-                    },
-                    yAxis:{
-                        type: 'category',
-                        data: Object.keys(builderJson.charts),
-                        /!*axisLine: {
-                            lineStyle: {
-                                color:'white',//坐标轴的颜色
-                            }
-                        },*!/
-                        axisLine: {
-                            lineStyle: {
-                                type: 'solid',
-                                color:'#fff',
-                                width:'2'
-                            }
-                        },
-                        /!*!//去掉坐标轴刻度线
-                        axisTick: {
-                            show: false
-                        },*!/
-                        axisLabel: {
-                            interval: 0,
-                            maxInterval:2,
-                            minInterval:1,
-                            rotate: 0,
-                            color: '#000000',//坐标值得具体的颜色
-                        },
-                        splitLine:{ show:false},  //设置不显示坐标区域内的y轴分割线
-                    },
+                 var option = {
+                 legend: {
+                 data: []
+                 },
+                 backgroundColor: {
+                 type: 'pattern',
+                 backgroundColor: '#FFFFFF',
+                 borderColor: '#FFFFFF',
+                 repeat: 'repeat'
+                 },
+                 grid: [{
+                 top: 50,
+                 width: '80%',
+                 height: '80%',
+                 bottom: '25%',
+                 left: 10,
+                 containLabel: true
+                 }, {
+                 top: '55%',
+                 width: '50%',
+                 bottom: 0,
+                 left: 10,
+                 containLabel: true
+                 }],
+                 xAxis: {
+                 type: 'value',
+                 max: builderJson.all,
+                 show: false,//false是不显示x轴
+                 axisTick: {width:10},//length后面这个数字用来设置坐标轴刻度的长度
+                 splitLine: {
+                 show: false
+                 }
+                 },
+                 yAxis:{
+                 type: 'category',
+                 data: Object.keys(builderJson.charts),
+                 /!*axisLine: {
+                 lineStyle: {
+                 color:'white',//坐标轴的颜色
+                 }
+                 },*!/
+                 axisLine: {
+                 lineStyle: {
+                 type: 'solid',
+                 color:'#fff',
+                 width:'2'
+                 }
+                 },
+                 /!*!//去掉坐标轴刻度线
+                 axisTick: {
+                 show: false
+                 },*!/
+                 axisLabel: {
+                 interval: 0,
+                 maxInterval:2,
+                 minInterval:1,
+                 rotate: 0,
+                 color: '#000000',//坐标值得具体的颜色
+                 },
+                 splitLine:{ show:false},  //设置不显示坐标区域内的y轴分割线
+                 },
 
-                    color:['red', 'green','yellow','blueviolet'],
-                    series: [{
-                        type: 'bar',
-                        stack: 'chart',
-                        barMaxWidth: '30',//柱子的宽度
-                        z: 3,
-                        label: {
-                            normal: {
-                                position: 'right',
-                                show: true,
+                 color:['red', 'green','yellow','blueviolet'],
+                 series: [{
+                 type: 'bar',
+                 stack: 'chart',
+                 barMaxWidth: '30',//柱子的宽度
+                 z: 3,
+                 label: {
+                 normal: {
+                 position: 'right',
+                 show: true,
 
-                            }
-                        },
-                        itemStyle: {
-                            //通常情况下：
-                            normal:{
-                                //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-                                color: function (params){
-                                    var colorList = ['rgb(203,136,35)','rgb(96,161,169)','rgb(195,52,48)','rgb(97,188,148)','rgb(146,199,176)','rgb(213,131,101)','rgb(68,111,114)'];
-                                    return colorList[params.dataIndex];
-                                },
-                            },
-                            //鼠标悬停时：
-                            emphasis: {
-                                shadowBlur: 10,
-                                shadowOffsetX: 0,
-                                shadowColor: 'rgba(0, 0, 0, 0.5)'
-                            }
-                        },
-                        data: Object.keys(builderJson.charts).map(function (key) {
-                            return builderJson.charts[key];
-                        }),
-                    }/!*, {
-                        type: 'bar',
-                        stack: 'chart',
-                        silent: true,
-                        itemStyle: {
-                            normal: {
-                                color: '#eee',
-                            }
-                        },
-                        data: Object.keys(builderJson.charts).map(function (key) {
-                            return builderJson.all - builderJson.charts[key];
-                        })
-                    }*!/],
-                    //控制边距　
-                    /!*grid: {
-                        left: '0%',
-                        right:'10%',
-                        containLabel: true,
-                    },*!/
-                };
-                // 使用刚指定的配置项和数据显示图表。
-                myChart.setOption(option);*/
+                 }
+                 },
+                 itemStyle: {
+                 //通常情况下：
+                 normal:{
+                 //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
+                 color: function (params){
+                 var colorList = ['rgb(203,136,35)','rgb(96,161,169)','rgb(195,52,48)','rgb(97,188,148)','rgb(146,199,176)','rgb(213,131,101)','rgb(68,111,114)'];
+                 return colorList[params.dataIndex];
+                 },
+                 },
+                 //鼠标悬停时：
+                 emphasis: {
+                 shadowBlur: 10,
+                 shadowOffsetX: 0,
+                 shadowColor: 'rgba(0, 0, 0, 0.5)'
+                 }
+                 },
+                 data: Object.keys(builderJson.charts).map(function (key) {
+                 return builderJson.charts[key];
+                 }),
+                 }/!*, {
+                 type: 'bar',
+                 stack: 'chart',
+                 silent: true,
+                 itemStyle: {
+                 normal: {
+                 color: '#eee',
+                 }
+                 },
+                 data: Object.keys(builderJson.charts).map(function (key) {
+                 return builderJson.all - builderJson.charts[key];
+                 })
+                 }*!/],
+                 //控制边距　
+                 /!*grid: {
+                 left: '0%',
+                 right:'10%',
+                 containLabel: true,
+                 },*!/
+                 };
+                 // 使用刚指定的配置项和数据显示图表。
+                 myChart.setOption(option);*/
 
 
 
@@ -1664,18 +1698,18 @@
         },
         mounted(){
             this.manxsh3 = false;
-           /* $("#tjts").live("click",function(){
-                var myChart = echarts.init(document.getElementById("main1"));
-                var url='${contextPath}/fyfjxx/getByZdid.do?vurlcode=${sessionScope.sUrlCode}&zdid='+zdfyid;
-                $.post(url,function(data){
-                    $(".cash").css("display","block");
-                    var mycars=new Array(data.a1,data.a2,data.a3,data.a4,data.a5,data.a6,data.a7,data.a8,data.a9,data.a10,data.a11,data.a12);
-                    var mycars1=new Array(data.b1,data.b2,data.b3,data.b4,data.b5,data.b6,data.b7,data.b8,data.b9,data.b10,data.b11,data.b12);
-                    //column(myChart,mycars,mycars1);
-                    piechart(myChart);
+            /* $("#tjts").live("click",function(){
+             var myChart = echarts.init(document.getElementById("main1"));
+             var url='${contextPath}/fyfjxx/getByZdid.do?vurlcode=${sessionScope.sUrlCode}&zdid='+zdfyid;
+             $.post(url,function(data){
+             $(".cash").css("display","block");
+             var mycars=new Array(data.a1,data.a2,data.a3,data.a4,data.a5,data.a6,data.a7,data.a8,data.a9,data.a10,data.a11,data.a12);
+             var mycars1=new Array(data.b1,data.b2,data.b3,data.b4,data.b5,data.b6,data.b7,data.b8,data.b9,data.b10,data.b11,data.b12);
+             //column(myChart,mycars,mycars1);
+             piechart(myChart);
 
-                },"json")
-            });*/
+             },"json")
+             });*/
             this.getInitData();
             const url2 = this.$api + "/yhcms/web/jcsj/wxFxxx.do";
             this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj,"chqxz":this.chqnxz}).then((res)=>{
@@ -1737,14 +1771,14 @@
                     this.manxsh3 = true;
                 }
                 /*for(var i=0;i<data.length;i++){
-                    if(data[i].kzcount){
-                        var dgdata = data[i].kzcount;
-                        dgdata = parseInt(dgdata);
-                        dgdata = dgdata/(20);
-                        data[i].kzcount = dgdata*100;
-                        data[i].kzcount = data[i].kzcount + "%";
-                    }
-                }*/
+                 if(data[i].kzcount){
+                 var dgdata = data[i].kzcount;
+                 dgdata = parseInt(dgdata);
+                 dgdata = dgdata/(20);
+                 data[i].kzcount = dgdata*100;
+                 data[i].kzcount = data[i].kzcount + "%";
+                 }
+                 }*/
             }, (res)=>{
                 Indicator.close()
             });

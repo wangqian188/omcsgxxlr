@@ -124,23 +124,30 @@
         }
       },
       selectTag(e){
-        const target = $(e.target), val = target.attr("value");
-        if(!val){return;}
+            const target = $(e.target), val = target.attr("value");
+            if(!val){return;}
+            if ($(e.target).hasClass('active')) {
+                let xgbq_t = new Set(this.xgbq);
+                xgbq_t.delete(val);
+                this.xgbq = [...xgbq_t];
 
-        if ($(e.target).hasClass('active')) {
-          let xgbq_t = new Set(this.xgbq);
-          xgbq_t.delete(val);
-          this.xgbq = [...xgbq_t];
+                $(e.target).removeClass('active');
+            } else {
+                if(this.xgbq.length < 5) {
+                    let xgbq_t = new Set(this.xgbq);
+                    xgbq_t.add(val);
+                    this.xgbq = [...xgbq_t];
 
-          $(e.target).removeClass('active');
-        } else {
-          let xgbq_t = new Set(this.xgbq);
-          xgbq_t.add(val);
-          this.xgbq = [...xgbq_t];
+                    $(e.target).addClass('active');
+                }else{
+                    Toast({
+                        message: '性格标签最多选5个',
+                        position: 'middle'
+                    });
+                }
+            }
 
-          $(e.target).addClass('active');
-        }
-      },
+        },
       getInitData(){
           const dlid = this.$route.params.dlid;
           this.id = dlid;

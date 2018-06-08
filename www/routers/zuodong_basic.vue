@@ -316,14 +316,23 @@
 
                         if(this.glfqid !=''&&this.glfqid!=null){
                           this.ywqx=false;
+                            this.saveqx = false;
+                         }else{
+                            this.ywqx=true;
                             this.saveqx = true;
-                         }
-                         if(this.xzqysq!=''&&this.xzqysq!=null&&this.xzqysq!=0){
-                          this.xzqx=false;
-                             this.saveqx = true;
                         }
+                         if(this.xzqysq!=''&&this.xzqysq!=null&&this.xzqysq!=0){
+                            this.xzqx=false;
+                            this.saveqx = false;
+                        }else{
+                             this.xzqx = true;
+                             this.saveqx = true;
+                         }
                         if( this.dtzdglid!=''&& this.dtzdglid !=null){
                           this.dtqx=false;
+                            this.saveqx = false;
+                        }else{
+                            this.dtqx=true;
                             this.saveqx = true;
                         }
                         if(this.glfqid !=''&&this.glfqid!=null && this.xzqysq!=''&&this.xzqysq!=null&&this.xzqysq!=0 && this.dtzdglid!=''&& this.dtzdglid !=null && this.jcg!='' && this.bzcg!='' && this.sjlc!='' &&this.lc!=''){

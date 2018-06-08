@@ -1154,10 +1154,10 @@
                                 this.xaddress = this.yezhuzshuj[i].address;
                             }
                         }
-                        console.log(this.xgbqid);
-                        console.log(this.xgssid);
-                        console.log(this.xgss);
-                        console.log(this.xgbq);
+                        this.xgbqid = this.xgssid;
+
+
+
                     }
                 }, (res)=>{
                     Indicator.close()
@@ -1213,13 +1213,14 @@
                                 this.xaddress = this.yezhuzshuj[i].address;
                             }
                         }
+                        this.xgbqid = this.xgssid;
                     }
                 }, (res)=>{
                     Indicator.close();
                 });
             },
             duijierendiji(){
-                alert(1111);
+
                 alert(this.xb);
             },
             gszcclass(){
@@ -1286,7 +1287,7 @@
                         }
                     }
                     this.xgss = this.xgssid;
-                    console.log(this.xgss);
+
                 }else{
                     Toast({
                         message: '性格标签最多选5个',
@@ -1749,16 +1750,16 @@
                         spinnerType: 'fading-circle'
                     });
                     const _this = this;
-                    /*
-                     setTimeout(function(){
-                     _this.$router.push({path:'/list2'});
-                     },1000);
-                     */
-                    /*if(this.tsbq == ""){
-                     this.tsbq = "";
-                     }else{
-                     this.tsbq = "、" + this.tsbq.join("、") + "、";
-                     }*/
+
+
+                    for(var g=0;g<this.xgbq_all.length;g++){
+                        for(var k=0;k<this.xgbqid.length;k++){
+                            if(this.xgbq_all[g].topic == this.xgbqid[k]){
+                                this.xgbqid[k] = this.xgbq_all[g].id;
+                            }
+                        }
+                    }
+
                     if (this.duijierid == '业主') {
                         this.$http.post(
                             this.$api + "/yhcms/web/wxqx/saveZdYzxx.do",
@@ -1767,7 +1768,7 @@
                                     "id": this.djrnameid,
                                     "fyid": this.fyid,
                                     "topic": this.djrid,
-                                    "xgbq": this.xgbqid.join(';'),
+                                    "xgbq": this.xgbqid,
                                     "phone": this.phone,
                                     "xb": this.xb,
                                     "xaddress": this.xaddress
@@ -1962,6 +1963,7 @@
                     }
                 }
 
+
             },
             saveBuildMsg(){
                 if(this.djrid == ''){
@@ -1986,6 +1988,15 @@
                      }else{
                      this.tsbq = "、" + this.tsbq.join("、") + "、";
                      }*/
+                    console.log(this.xgbqid);
+                    for(var g=0;g<this.xgbq_all.length;g++){
+                        for(var k=0;k<this.xgbqid.length;k++){
+                            if(this.xgbq_all[g].topic == this.xgbqid[k]){
+                                this.xgbqid[k] = this.xgbq_all[g].id;
+                            }
+                        }
+                    }
+                    console.log(this.xgbqid);
                     if(this.duijierid == '业主'){
                         this.$http.post(
                             this.$api + "/yhcms/web/wxqx/saveZdYzxx.do",
@@ -2189,8 +2200,8 @@
                 }
         },
         mounted(){
-            this.tebqqxpd();
             this.getXgbq();
+            this.tebqqxpd();
             $('title').html("跟进工单");
             //获取手机是ios还是Android
             if(/android/i.test(navigator.userAgent)){

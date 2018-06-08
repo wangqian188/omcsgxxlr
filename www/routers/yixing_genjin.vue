@@ -865,7 +865,7 @@
                     "code": "300000065"
                 }, that = this;
 
-                axios.post("/yhcms/web/wxqx/getLpZdfyxx.do", paraObj)
+                axios.post("/yhcms/web/wxqx/getOwnerList.do", paraObj)
                     .then(function (response) {
                         Indicator.close()
                         that.loading = false;

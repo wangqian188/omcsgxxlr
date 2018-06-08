@@ -107,6 +107,8 @@
     height: 1.1rem;
     width: 1.2rem;
 }
+.divheightop{top:-4.6rem;}
+.diverzhuangheightop{top:7.4rem;}
 .wyegongsi{margin-left: 0.5rem;}
 .zhouqi{width: 87%;margin-top: 0.3rem;background-color: white;opacity:0.9;padding-top: 0.3rem;border-radius:5px;}
 .gunglizd{color:rgb(150,150,150);font-size: 0.3rem !important;}
@@ -123,80 +125,82 @@
                         <div style="font-size: 0.36rem;margin-top: 0.2rem;">联系电话:{{wname5}}</div>
                     </div>
                     <div class="house_msg_content wyegongsi zhouqi">
-                        <!--<span class="gunglizd gungil2" style="">简装周期：<i class="jianzzq" v-text="jzzhouq" style="color:#5b5b5b;"></i></span>
+                        <span class="gunglizd gungil2" style="">简装周期：<i class="jianzzq" v-text="jzzhouq" style="color:#5b5b5b;"></i></span>
                         <span class="gunglizd gungil2">中装周期：<i class="jianzzq" v-text="zzzhouq" style="color:#5b5b5b;"></i></span>
                         <span class="gunglizd gungil2">大装周期：<i class="jianzzq" v-text="dzzhouq" style="color:#5b5b5b;"></i></span>
-                        <span class="gunglizd gungil2">物业分级：<i class="jianzzq" v-text="wysort" style="color:#5b5b5b;"></i></span>-->
+                        <!--<span class="gunglizd gungil2">物业分级：<i class="jianzzq" v-text="wysort" style="color:#5b5b5b;"></i></span>-->
                         <div class="gunglizd" style="clear: both;">
                             <span class="gunglizd" style="width: 28%;color:#5b5b5b;">管理座栋：</span>
-                            <span class="" style="width: 75%;float: right;"><i class="jianzzq" v-text="glzdh" style="color: black;"></i></span>
+                            <span class="" style="width: 75%;float: right;"><i class="jianzzq" v-text="glzdh" style="color:rgb(91,91,91);"></i></span>
                         </div>
-                        <div class="gunglizd" style="clear: both;margin-top: 0.3rem;min-height:3.7rem;">
+                        <div class="gunglizd" style="clear: both;margin-top: 0.3rem;min-height:.7rem;">
                             <span class="gunglizd" style="width: 28%;color:#5b5b5b;">物业地址：</span>
-                            <span class="" style="width: 75%;float: right;"><i class="jianzzq" v-text="addresswy" style="color:black;"></i></span>
+                            <span class="" style="width: 75%;float: right;"><i class="jianzzq" v-text="addresswy" style="color:rgb(91,91,91);"></i></span>
                         </div>
-                        <!--<div class="gunglizd" style="min-height:1.7rem;clear: both;margin-top: 0.3rem;">
+                        <div class="gunglizd" style="min-height:1.7rem;clear: both;margin-top: 0.3rem;">
                             <span class="gunglizd" style="width: 28%;color:#5b5b5b;">备注信息：</span>
                             <span style="width: 75%;float: right;margin-bottom:0.3rem;"><i class="jianzzq" v-text="beizhu" style="color:#5b5b5b;"></i></span>
-                        </div>-->
+                        </div>
                         <div style="clear: both;"></div>
                     </div>
-                    <!--<div class="zhouqi house_msg_content" style="height: 4.45rem;margin-top: 0.2rem;margin-left: 0.5rem;">
+                    <div class="zhouqi house_msg_content" style="min-height: 4.45rem;margin-top: 0.2rem;margin-left: 0.5rem;">
                         <span class="gunglizd gungil2" style="width: 80%;">姓名：<i class="jianzzq" v-text="name" style="color:#5b5b5b;"></i></span>
                         <span class="gunglizd gungil2" style="width: 80%;">电话：<i class="jianzzq" v-text="phone" style="color:#5b5b5b;"></i></span>
                         <span class="gunglizd gungil2" style="width: 80%;">微信：<i class="jianzzq" v-text="wexin" style="color:#5b5b5b;"></i></span>
                         <span class="gunglizd gungil2" style="width: 80%;">提供人：<i class="jianzzq" v-text="tigr" style="color:#5b5b5b;"></i></span>
-                        <span class="gunglizd gungil2" style="width: 80%;">备注：<i class="jianzzq" v-text="beizhukefu" style="color:#5b5b5b;"></i></span>
-                        <div class="kefu" style="position:relative;top:-4.02rem;left:5.1rem;clear: both;border-top-right-radius:5px;" rel="客服" @click="kefu($event)" v-if="kefuif1">
-                            <a href="javascript:;" rel="客服" >
-                                <img src="../resources/images/loupan/1.png" rel="客服"  style="width: 0.5rem;margin-left: 0.35rem;margin-top: 0.1rem;">
-                                <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="客服" >客服</div>
-                            </a>
+                        <span class="gunglizd" style="width: 80%;">备注：<i class="jianzzq" v-text="beizhukefu" style="color:#5b5b5b;"></i></span>
+                        <div style="">
+                            <div class="kefu diverzhuangheightop" style="position:absolute;left:5.85rem;clear: both;border-top-right-radius:5px;" rel="客服" @click="kefu($event)" v-if="kefuif1">
+                                <a href="javascript:;" rel="客服" >
+                                    <img src="../resources/images/loupan/1.png" rel="客服"  style="width: 0.5rem;margin-left: 0.35rem;margin-top: 0.1rem;">
+                                    <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="客服" >客服</div>
+                                </a>
+                            </div>
+                            <div class="meidian diverzhuangheightop" style="position:absolute;left:5.85rem;clear: both;border-top-right-radius:5px;" rel="客服" @click="kefu($event)" v-else>
+                                <a href="javascript:;" rel="客服">
+                                    <img src="../resources/images/loupan/1-1.png" rel="客服" style="width: 0.5rem;margin-left: 0.35rem;margin-top: 0.1rem;">
+                                    <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="客服">客服</div>
+                                </a>
+                            </div>
+                            <div class="kefu" style="position:absolute;top:8.5rem;left:5.85rem;margin-top: 1px;" rel="二装" @click="kefu($event)" v-if="kefuif2">
+                                <a href="javascript:;" rel="二装">
+                                    <img src="../resources/images/loupan/2.png" style="width: 0.5rem;margin-left: 0.35rem;margin-top: 0.1rem;" rel="二装">
+                                    <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="二装">二装</div>
+                                </a>
+                            </div>
+                            <div class="meidian" style="position:absolute;top:8.5rem;left:5.85rem;margin-top: 1px;" rel="二装" @click="kefu($event)" v-else>
+                                <a href="javascript:;" rel="二装">
+                                    <img src="../resources/images/loupan/2-2.png" style="width: 0.55rem;margin-left: 0.35rem;margin-top: 0.1rem;" rel="二装">
+                                    <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="二装">二装</div>
+                                </a>
+                            </div>
+                            <div class="kefu" style="position:absolute;top:9.62rem;left:5.85rem;margin-top: 1px;" rel="安保" @click="kefu($event)" v-if="kefuif3">
+                                <a href="javascript:;" rel="安保">
+                                    <img src="../resources/images/loupan/3.png" style="width: 0.5rem;margin-left: 0.35rem;margin-top: 0.1rem;" rel="安保">
+                                    <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="安保">安保</div>
+                                </a>
+                            </div>
+                            <div class="meidian " style="position:absolute;top:9.62rem;left:5.85rem;margin-top: 1px;" rel="安保" @click="kefu($event)" v-else>
+                                <a href="javascript:;" rel="安保">
+                                    <img src="../resources/images/loupan/3-3.png" style="width: 0.45rem;margin-left: 0.4rem;margin-top: 0.1rem;" rel="安保">
+                                    <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="安保">安保</div>
+                                </a>
+                            </div>
+                            <div class="kefu" style="position:absolute;top:10.74rem;left:5.85rem;border-bottom-right-radius:5px;margin-top: 1px;" rel="楼管" @click="kefu($event)" v-if="kefuif4">
+                                <a href="javascript:;" rel="楼管">
+                                    <img src="../resources/images/loupan/4.png" style="width: 0.5rem;margin-left: 0.35rem;margin-top: 0.1rem;" rel="楼管">
+                                    <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="楼管">楼管</div>
+                                </a>
+                            </div>
+                            <div class="meidian" style="position:absolute;top:10.74rem;left:5.85rem;border-bottom-right-radius:5px;margin-top: 1px;z-index: 12;" rel="楼管" @click="kefu($event)" v-else>
+                                <a href="javascript:;" rel="楼管">
+                                    <img src="../resources/images/loupan/4-4.png" style="width: 0.5rem;margin-left: 0.35rem;margin-top: 0.1rem;" rel="楼管">
+                                    <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="楼管">楼管</div>
+                                </a>
+                            </div>
                         </div>
-                        <div class="meidian" style="position:relative;top:-4.02rem;left:5.1rem;clear: both;border-top-right-radius:5px;" rel="客服" @click="kefu($event)" v-else>
-                            <a href="javascript:;" rel="客服">
-                                <img src="../resources/images/loupan/1-1.png" rel="客服" style="width: 0.5rem;margin-left: 0.35rem;margin-top: 0.1rem;">
-                                <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="客服">客服</div>
-                            </a>
-                        </div>
-                        <div class="kefu" style="position:relative;top:-4.02rem;left:5.1rem;margin-top: 1px;" rel="二装" @click="kefu($event)" v-if="kefuif2">
-                            <a href="javascript:;" rel="二装">
-                                <img src="../resources/images/loupan/2.png" style="width: 0.5rem;margin-left: 0.35rem;margin-top: 0.1rem;" rel="二装">
-                                <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="二装">二装</div>
-                            </a>
-                        </div>
-                        <div class="meidian" style="position:relative;top:-4.02rem;left:5.1rem;margin-top: 1px;" rel="二装" @click="kefu($event)" v-else>
-                            <a href="javascript:;" rel="二装">
-                                <img src="../resources/images/loupan/2-2.png" style="width: 0.55rem;margin-left: 0.35rem;margin-top: 0.1rem;" rel="二装">
-                                <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="二装">二装</div>
-                            </a>
-                        </div>
-                        <div class="kefu" style="position:relative;top:-4.02rem;left:5.1rem;margin-top: 1px;" rel="安保" @click="kefu($event)" v-if="kefuif3">
-                            <a href="javascript:;" rel="安保">
-                                <img src="../resources/images/loupan/3.png" style="width: 0.5rem;margin-left: 0.35rem;margin-top: 0.1rem;" rel="安保">
-                                <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="安保">安保</div>
-                            </a>
-                        </div>
-                        <div class="meidian" style="position:relative;top:-4.02rem;left:5.1rem;margin-top: 1px;" rel="安保" @click="kefu($event)" v-else>
-                            <a href="javascript:;" rel="安保">
-                                <img src="../resources/images/loupan/3-3.png" style="width: 0.45rem;margin-left: 0.4rem;margin-top: 0.1rem;" rel="安保">
-                                <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="安保">安保</div>
-                            </a>
-                        </div>
-                        <div class="kefu" style="position:relative;top:-4.02rem;left:5.1rem;border-bottom-right-radius:5px;margin-top: 1px;" rel="楼管" @click="kefu($event)" v-if="kefuif4">
-                            <a href="javascript:;" rel="楼管">
-                                <img src="../resources/images/loupan/4.png" style="width: 0.5rem;margin-left: 0.35rem;margin-top: 0.1rem;" rel="楼管">
-                                <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="楼管">楼管</div>
-                            </a>
-                        </div>
-                        <div class="meidian" style="position:relative;top:-4.02rem;left:5.1rem;border-bottom-right-radius:5px;margin-top: 1px;" rel="楼管" @click="kefu($event)" v-else>
-                            <a href="javascript:;" rel="楼管">
-                                <img src="../resources/images/loupan/4-4.png" style="width: 0.5rem;margin-left: 0.35rem;margin-top: 0.1rem;" rel="楼管">
-                                <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="楼管">楼管</div>
-                            </a>
-                        </div>
+                        <div style="clear: both;"></div>
                     </div>
--->
                 </div>
             </div>
 
@@ -237,6 +241,7 @@
                 kefuif2:false,
                 kefuif3:false,
                 kefuif4:false,
+                datagc:[],
 
 
 
@@ -277,30 +282,132 @@
         },
         methods: {
             kefu(e){
+
                 const target = $(e.target), txt = target.attr("rel");
                 if(txt == "客服"){
                     this.kefuif1 = true;
                     this.kefuif2 = false;
                     this.kefuif3 = false;
                     this.kefuif4 = false;
+                    if(this.datagc.wy1.name){
+                        this.name = this.datagc.wy1.name == '' ? '暂无数据' : this.datagc.wy1.name;
+                    }else{
+                        this.name = "暂无数据";
+                    }
+                    if(this.datagc.wy1.phone){
+                        this.phone = this.datagc.wy1.phone == '' ? '暂无数据' : this.datagc.wy1.phone;
+                    }else{
+                        this.phone = '暂无数据';
+                    }
+                    if(this.datagc.wy1.wxcard){
+                        this.wexin = this.datagc.wy1.wxcard == '' ? '暂无数据' : this.datagc.wy1.wxcard;
+                    }else{
+                        this.wexin = "暂无数据";
+                    }
+                    if(this.datagc.wy1.depart && this.datagc.wy1.person){
+                        this.tigr = this.datagc.wy1.depart+"-"+this.datagc.wy1.person;
+                    }else{
+                        this.tigr = "暂无数据";
+                    }
+                    if(this.datagc.wy1.bzh){
+                        this.beizhukefu = this.datagc.wy1.bzh == '' ? '暂无数据' : this.datagc.wy1.bzh;
+                    }else{
+                        this.beizhukefu = "暂无数据";
+                    }
                 }
                 if(txt == "二装"){
                     this.kefuif1 = false;
                     this.kefuif2 = true;
                     this.kefuif3 = false;
                     this.kefuif4 = false;
+                    if(this.datagc.wy2.name){
+                        this.name = this.datagc.wy2.name == '' ? '暂无数据' : this.datagc.wy2.name;
+                    }else{
+                        this.name = "暂无数据";
+                    }
+                    if(this.datagc.wy2.phone){
+                        this.phone = this.datagc.wy2.phone == '' ? '暂无数据' : this.datagc.wy2.phone;
+                    }else{
+                        this.phone = '暂无数据';
+                    }
+                    if(this.datagc.wy2.wxcard){
+                        this.wexin = this.datagc.wy2.wxcard == '' ? '暂无数据' : this.datagc.wy2.wxcard;
+                    }else{
+                        this.wexin = "暂无数据";
+                    }
+                    if(this.datagc.wy2.depart && this.datagc.wy2.person){
+                        this.tigr = this.datagc.wy2.depart+"-"+this.datagc.wy2.person;
+                    }else{
+                        this.tigr = "暂无数据";
+                    }
+                    if(this.datagc.wy2.bzh){
+                        this.beizhukefu = this.datagc.wy2.bzh == '' ? '暂无数据' : this.datagc.wy2.bzh;
+                    }else{
+                        this.beizhukefu = "暂无数据";
+                    }
                 }
                 if(txt == "安保"){
                     this.kefuif1 = false;
                     this.kefuif2 = false;
                     this.kefuif3 = true;
                     this.kefuif4 = false;
+                    if(this.datagc.wy3.name){
+                        this.name = this.datagc.wy3.name == '' ? '暂无数据' : this.datagc.wy3.name;
+                    }else{
+                        this.name = "暂无数据";
+                    }
+                    if(this.datagc.wy3.phone){
+                        this.phone = this.datagc.wy3.phone == '' ? '暂无数据' : this.datagc.wy3.phone;
+                    }else{
+                        this.phone = '暂无数据';
+                    }
+                    if(this.datagc.wy3.wxcard){
+                        this.wexin = this.datagc.wy3.wxcard == '' ? '暂无数据' : this.datagc.wy3.wxcard;
+                    }else{
+                        this.wexin = "暂无数据";
+                    }
+                    if(this.datagc.wy3.depart && this.datagc.wy3.person){
+                        this.tigr = this.datagc.wy3.depart+"-"+this.datagc.wy3.person;
+                    }else{
+                        this.tigr = "暂无数据";
+                    }
+                    if(this.datagc.wy3.bzh){
+                        this.beizhukefu = this.datagc.wy3.bzh == '' ? '暂无数据' : this.datagc.wy3.bzh;
+                    }else{
+                        this.beizhukefu = "暂无数据";
+                    }
                 }
                 if(txt == "楼管"){
                     this.kefuif1 = false;
                     this.kefuif2 = false;
                     this.kefuif3 = false;
                     this.kefuif4 = true;
+                    this.beizhukefu = this.datagc.wy4.bzh;
+                    if(this.datagc.wy4.name){
+                        this.name = this.datagc.wy4.name == '' ? '暂无数据' : this.datagc.wy4.name;
+                    }else{
+                        this.name = "暂无数据";
+                    }
+                    if(this.datagc.wy4.phone){
+                        this.phone = this.datagc.wy4.phone == '' ? '暂无数据' : this.datagc.wy4.phone;
+                    }else{
+                        this.phone = '暂无数据';
+                    }
+                    if(this.datagc.wy4.wxcard){
+                        this.wexin = this.datagc.wy4.wxcard == '' ? '暂无数据' : this.datagc.wy4.wxcard;
+                    }else{
+                        this.wexin = "暂无数据";
+                    }
+                    if(this.datagc.wy4.depart && this.datagc.wy4.person){
+                        this.tigr = this.datagc.wy4.depart+"-"+this.datagc.wy4.person;
+                    }else{
+                        this.tigr = "暂无数据";
+                    }
+                    if(this.datagc.wy4.bzh){
+                        this.beizhukefu = this.datagc.wy4.bzh == '' ? '暂无数据' : this.datagc.wy4.bzh;
+                    }else{
+                        this.beizhukefu = "暂无数据";
+                    }
                 }
 
             },
@@ -317,6 +424,8 @@
                     const data1 = JSON.parse(res.bodyText).data;
                     $("input").attr('placeholder',"");
                     const data = data1.wyxx;
+                    this.datagc = data1;
+                    console.log(this.datagc);
                     that.optionsgssx = data1.zdhs;
                     //this.showShadow=1;
                     this.id=data.id;
@@ -328,11 +437,116 @@
                     this.wysort = data.wysort == '' ? '暂无数据' : data.wysort;
                     this.beizhu = data.bzh == '' ? '暂无数据' : data.bzh;
                     this.addresswy = data.wyaddress == '' ? '暂无数据' : data.wyaddress;
-                    this.name = data1.wy1.name;
-                    this.phone = data1.wy1.phone;
-                    this.wexin = data1.wy1.wxcard;
-                    this.tigr = data1.wy1.depart+"-"+data1.wy1.person;
-                    this.beizhukefu = data1.wy1.bzh;
+
+                    if(this.kefuif1){
+                        if(data1.wy1.name){
+                            this.name = data1.wy1.name == '' ? '暂无数据' : data1.wy1.name;
+                        }else{
+                            this.name = "暂无数据";
+                        }
+                        if(data1.wy1.phone){
+                            this.phone = data1.wy1.phone == '' ? '暂无数据' : data1.wy1.phone;
+                        }else{
+                            this.phone = '暂无数据';
+                        }
+                        if(data1.wy1.wxcard){
+                            this.wexin = data1.wy1.wxcard == '' ? '暂无数据' : data1.wy1.wxcard;
+                        }else{
+                            this.wexin = "暂无数据";
+                        }
+                        if(data1.wy1.depart && data1.wy1.person){
+                            this.tigr = data1.wy1.depart+"-"+data1.wy1.person;
+                        }else{
+                            this.tigr = "暂无数据";
+                        }
+                        if(data1.wy1.bzh){
+                            this.beizhukefu = data1.wy1.bzh == '' ? '暂无数据' : data1.wy1.bzh;
+                        }else{
+                            this.beizhukefu = "暂无数据";
+                        }
+                    }
+                    if(this.kefuif2){
+                        if(data1.wy2.name){
+                            this.name = data1.wy2.name == '' ? '暂无数据' : data1.wy2.name;
+                        }else{
+                            this.name = "暂无数据";
+                        }
+                        if(data1.wy2.phone){
+                            this.phone = data1.wy2.phone == '' ? '暂无数据' : data1.wy2.phone;
+                        }else{
+                            this.phone = '暂无数据';
+                        }
+                        if(data1.wy2.wxcard){
+                            this.wexin = data1.wy2.wxcard == '' ? '暂无数据' : data1.wy2.wxcard;
+                        }else{
+                            this.wexin = "暂无数据";
+                        }
+                        if(data1.wy2.depart && data1.wy2.person){
+                            this.tigr = data1.wy2.depart+"-"+data1.wy2.person;
+                        }else{
+                            this.tigr = "暂无数据";
+                        }
+                        if(data1.wy2.bzh){
+                            this.beizhukefu = data1.wy2.bzh == '' ? '暂无数据' : data1.wy2.bzh;
+                        }else{
+                            this.beizhukefu = "暂无数据";
+                        }
+                    }
+                    if(this.kefuif3){
+                        if(data1.wy3.name){
+                            this.name = data1.wy3.name == '' ? '暂无数据' : data1.wy3.name;
+                        }else{
+                            this.name = "暂无数据";
+                        }
+                        if(data1.wy3.phone){
+                            this.phone = data1.wy3.phone == '' ? '暂无数据' : data1.wy3.phone;
+                        }else{
+                            this.phone = '暂无数据';
+                        }
+                        if(data1.wy3.wxcard){
+                            this.wexin = data1.wy3.wxcard == '' ? '暂无数据' : data1.wy3.wxcard;
+                        }else{
+                            this.wexin = "暂无数据";
+                        }
+                        if(data1.wy3.depart && data1.wy3.person){
+                            this.tigr = data1.wy3.depart+"-"+data1.wy3.person;
+                        }else{
+                            this.tigr = "暂无数据";
+                        }
+                        if(data1.wy3.bzh){
+                            this.beizhukefu = data1.wy3.bzh == '' ? '暂无数据' : data1.wy3.bzh;
+                        }else{
+                            this.beizhukefu = "暂无数据";
+                        }
+                    }
+                    if(this.kefuif4){
+                        if(data1.wy4.name){
+                            this.name = data1.wy4.name == '' ? '暂无数据' : data1.wy4.name;
+                        }else{
+                            this.name = "暂无数据";
+                        }
+                        if(data1.wy4.phone){
+                            this.phone = data1.wy4.phone == '' ? '暂无数据' : data1.wy4.phone;
+                        }else{
+                            this.phone = '暂无数据';
+                        }
+                        if(data1.wy4.wxcard){
+                            this.wexin = data1.wy4.wxcard == '' ? '暂无数据' : data1.wy4.wxcard;
+                        }else{
+                            this.wexin = "暂无数据";
+                        }
+                        if(data1.wy4.depart && data1.wy4.person){
+                            this.tigr = data1.wy4.depart+"-"+data1.wy4.person;
+                        }else{
+                            this.tigr = "暂无数据";
+                        }
+                        if(data1.wy4.bzh){
+                            this.beizhukefu = data1.wy4.bzh == '' ? '暂无数据' : data1.wy4.bzh;
+                        }else{
+                            this.beizhukefu = "暂无数据";
+                        }
+                    }
+
 
 
 

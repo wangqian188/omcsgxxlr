@@ -596,8 +596,12 @@
                 let user22 = JSON.parse(localStorage.getItem('cook'));
                 const url = this.$api + "/yhcms/web/wxqx/getLpqx.do";
                 this.$http.post(url, {"cookie":user22.sjs,"lpid":this.$route.params.lpid,"foreEndType":2,"code":"30000008"}).then((res)=>{
+                        Indicator.close();
+                        const data = JSON.parse(res.bodyText).data;
+                /*const url = this.$api + "/yskjApp/apptbcity/getShq.do";
+                this.$http.post(url,{"fdparentCode":"110101"}).then((res)=>{
                     Indicator.close();
-                    const data = JSON.parse(res.bodyText).data;
+                    const data = JSON.parse(res.bodyText).pd;*/
                     const meg = JSON.parse(res.bodyText).message;
                     this.ryzt = data.ryzt;
                     this.qxzt = data.qxzt;

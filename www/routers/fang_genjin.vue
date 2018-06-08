@@ -65,13 +65,13 @@
                 </li>
 
                 <!--跟进工单-->
-                <!--<li class="clearfix" style="font-size: 0.32rem;border-bottom-left-radius:5px;border-bottom-right-radius:5px;box-shadow: 1px 1px 3px rgb(196,195,200);line-height: 1rem !important;" v-show="hzif">
+                <li class="clearfix" style="font-size: 0.32rem;border-bottom-left-radius:5px;border-bottom-right-radius:5px;box-shadow: 1px 1px 3px rgb(196,195,200);line-height: 1rem !important;" v-show="hzif">
                     <span class="ys_tit w170" style="width: 2rem !important;padding-left: 0.2rem;">合作意向：</span>
                     <div class="ys_item_con fl">
                         <input type="text" value="" v-model.trim="hzyx" onfocus="this.blur()" placeholder="请选择" style="padding-left:10%;font-size: 0.32rem;width: 80%;" @click="openDecorationTypeHzyx">
                         <i class="right_arrow" @click="openDecorationTypeHzyx">&gt;</i>
                     </div>
-                </li>-->
+                </li>
 
                 <div class="analy_item" style="font-size: 0.32rem;padding: 0;margin-top: 0.4rem;box-shadow: 1px 1px 3px rgb(196,195,200);border-radius:5px;">
                     <span class="analy_tit db" style="padding-left: 0.45rem;line-height: 0.8rem;">备注</span>
@@ -161,6 +161,7 @@
                 lpname:'',
                 zdhname:'',
                 hzif:false,
+                fenjiqx:'',
                 bezhu:'',//备注
                 fyzsqk:'',//房源租售情况
                 sfjg:'',//是否精耕
@@ -240,6 +241,7 @@
                 if(values[0] == ""){
                     this.slots[1].values = [''];
                     this.fygjzt = "";
+                    this.fygjlx = "";
                 }
                 if(values[0] == "有效"){
                     this.slots[1].values = this.slots1;
@@ -366,6 +368,14 @@
                 Indicator.open({
                     text: '',
                     spinnerType: 'fading-circle'
+                });
+                let user22 = JSON.parse(localStorage.getItem('cook'));
+                const url4 = this.$api + "/yhcms/web/wxqx/getOwnerQx.do";
+                this.$http.post(url4, {"cookie":user22.sjs,"fyid":this.fyid}).then((res)=>{
+                    Indicator.close();
+                    this.fenjiqx = JSON.parse(res.bodyText).data;
+                }, (res)=>{
+                    Indicator.close()
                 });
                 const url = this.$api + "/yhcms/web/wxqx/getGjxx.do";
                 let that = this;
@@ -533,6 +543,7 @@
                 }, (res)=>{
                     Indicator.close()
                 });
+
             },
             deletdij(){
                 this.baocunzhih = false;
@@ -604,6 +615,7 @@
                 window.history.go(-1);
             },
             saveInfo(){
+
                 const _this = this;
                 if(this.fygjzt != "" && !this.fygjlx){
                     Toast({
@@ -637,6 +649,7 @@
                             var fygjzt = 3;
                         }else{
                             var fygjzt = '';
+
                         }
                         var hzyx = '';
                         if(this.hzyx != ''){
@@ -661,7 +674,6 @@
                             Indicator.close();
                             var result = JSON.parse(res.bodyText);
                             if (result.success) {
-
                                 //保存合作意向的接口
                                 this.$http.post(
                                     this.$api + "/yhcms/web/wxqx/updateGjxx.do",
@@ -675,22 +687,21 @@
                                     Indicator.close();
                                     var result = JSON.parse(res.bodyText);
                                     if (result.success) {
-
-                                        Toast({
-                                            message: '保存成功',
-                                            duration: 1000
-                                        });
-
                                         this.fyyzid = result.fyyzid;
 
                                         /*跟进工单*/
-                                        /*if(this.hzyx == ""){*/
+                                        if(this.fygjzt == "有效" && this.fenjiqx == 1){
+                                            this.baocunzhih = true;
+                                         }else{
+                                            Toast({
+                                                message: '保存成功',
+                                                duration: 1000
+                                            });
+
                                             setTimeout(function () {
                                                 history.go(-1);
                                             }, 1000);
-                                       /* }else{
-                                            this.baocunzhih = true;
-                                        }*/
+                                         }
 
                                     } else {
                                         Toast({

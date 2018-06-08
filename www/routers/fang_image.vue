@@ -289,7 +289,6 @@
              if(img.id === "xxx"){
                  console.log(img.url);
                  const [_, data] = img.url.split(","), [prefix, t] = img.suffix.split('/');
-                 alert(1111);
                  console.log([_, data]);
                  that.saveImages(data, t, function(path){
                      obj.push({"id":"", "isdelete":"0", "url":path});

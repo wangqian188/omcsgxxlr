@@ -49,7 +49,7 @@
             <a href="javascript:;" @click="loupan_zidian">楼盘字典</a>
 
             <!--跟进工单-->
-            <!--<a href="javascript:;" @click="yixing_genjin">意向跟进</a>-->
+            <a href="javascript:;" @click="yixing_genjin">意向跟进</a>
 
             <a href="javascript:;" @click="modify_pwd">修改密码</a>
           </div>
